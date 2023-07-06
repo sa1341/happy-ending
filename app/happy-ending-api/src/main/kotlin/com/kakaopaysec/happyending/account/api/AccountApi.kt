@@ -19,3 +19,8 @@ class AccountApi(
         return accountRepository.findByIdOrNull(accountId)
     }
 }
+
+data class SecretDto(
+    val id: String,
+    val password: String
+)

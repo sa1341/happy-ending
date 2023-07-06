@@ -1,9 +1,10 @@
-package com.kakaopaysec.happyendingapi
+package com.kakaopaysec.happyending
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.test.context.ActiveProfiles
 
-@SpringBootTest
+@ActiveProfiles("local")
 class HappyEndingApiApplicationTests {
 
     @Test

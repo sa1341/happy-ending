@@ -3,4 +3,12 @@ dependencies {
     api("org.springframework.boot:spring-boot-starter-data-jpa")
 }
 
+tasks {
+    jar {
+        enabled = true
+    }
 
+    bootJar {
+        enabled = false
+    }
+}

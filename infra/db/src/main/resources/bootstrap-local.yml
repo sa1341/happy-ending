@@ -1,0 +1,6 @@
+aws:
+  secretsmanager:
+    failFast: false
+    enabled: false
+    name: prod/happyending/test
+    region: ap-northeast-2
