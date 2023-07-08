@@ -1,9 +1,0 @@
-spring:
-  config:
-    activate:
-      on-profile: beta
-    import:
-  cloud:
-    aws:
-      secretsmanager:
-        enabled: true

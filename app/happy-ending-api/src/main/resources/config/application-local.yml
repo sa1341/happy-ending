@@ -2,6 +2,10 @@ spring:
   config:
     activate:
       on-profile: local
+    import:
+      - db.yml
+      - client.yml
+
 
 logging:
   level:

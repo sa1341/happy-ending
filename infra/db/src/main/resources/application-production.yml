@@ -1,9 +1,0 @@
-spring:
-  config:
-    activate:
-      on-profile: production
-    import: optional:aws-secretsmanager:/secret/pord/happyending
-  cloud:
-    aws:
-      secretsmanager:
-        enabled: true

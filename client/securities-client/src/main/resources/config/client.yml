@@ -1,0 +1,15 @@
+spring.config.activate.on-profile: local
+base:
+  url: http://localhost:8080
+---
+spring.config.activate.on-profile: sandbox
+base:
+  url: http://sandbox-test:8080
+---
+spring.config.activate.on-profile: beta
+base:
+  url: http://beta-test:8080
+---
+spring.config.activate.on-profile: production
+base:
+  url: http://prod-test:8080

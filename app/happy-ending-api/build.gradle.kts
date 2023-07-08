@@ -20,8 +20,6 @@ dependencies {
     implementation(project(":support:metric"))
     implementation(project(":support:utils"))
 
-    implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.springframework.boot:spring-boot-starter-webflux")
     implementation("io.github.resilience4j:resilience4j-spring-boot3")
 
     testImplementation("org.springframework.restdocs:spring-restdocs-asciidoctor")

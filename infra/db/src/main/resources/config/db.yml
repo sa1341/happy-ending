@@ -1,0 +1,30 @@
+spring:
+  cloud:
+    aws:
+      secretsmanager:
+        region: ap-northeast-2
+---
+spring.config.activate.on-profile: local
+test:
+  id: jean
+  password: localtest
+---
+spring.config.activate.on-profile: sandbox
+test:
+  id: jean
+  password: sandbox
+---
+spring.config.activate.on-profile: beta
+test:
+  id: jean
+  password: beta
+---
+spring:
+  config:
+    activate:
+      on-profile: production
+    import: optional:aws-secretsmanager:prod/happyending/db
+  cloud:
+    aws:
+      secretsmanager:
+        enabled: true

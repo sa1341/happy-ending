@@ -2,4 +2,6 @@ spring:
   config:
     activate:
       on-profile: sandbox
-
+    import:
+      - db.yml
+      - client.yml

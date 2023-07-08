@@ -47,6 +47,8 @@ subprojects {
     dependencies {
         implementation("org.springframework.boot:spring-boot-starter-actuator")
         implementation("org.springframework.boot:spring-boot-starter")
+        implementation("org.springframework.boot:spring-boot-starter-web")
+        implementation("org.springframework.boot:spring-boot-starter-webflux")
         implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
         implementation("org.jetbrains.kotlin:kotlin-reflect")
         implementation("io.awspring.cloud:spring-cloud-aws-starter:${Versions.AWS}")
@@ -54,8 +56,8 @@ subprojects {
             "io.awspring.cloud:spring-cloud-aws-starter-secrets-manager:" +
                 Versions.AWS_SECRETS_MANAGER_CONFIG
         )
-        implementation("io.github.microutils:kotlin-logging:${Versions.KOTLIN_LOGGING}")
         implementation("software.amazon.awssdk:sts:${Versions.AWS_SDK_STS}")
+        implementation("io.github.microutils:kotlin-logging:${Versions.KOTLIN_LOGGING}")
         annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
         testImplementation("org.springframework.boot:spring-boot-starter-test") {
             exclude(module = "mockito-core")
