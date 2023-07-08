@@ -1,7 +1,0 @@
-aws:
-  secretsmanager:
-    name: pord/happyending
-cloud:
-  aws:
-    region:
-      static: ap-northeast-2

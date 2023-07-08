@@ -1,10 +1,14 @@
 plugins {
-    id("org.springframework.boot") version Versions.SPRING_BOOT_VERSION apply false
+    id("org.springframework.boot") version Versions.SPRING_BOOT_VERSION
     id("io.spring.dependency-management") version Versions.SPRING_DEPENDENCY_MANAGEMENT_VERSION
+    id("org.jlleitschuh.gradle.ktlint") version Versions.KT_LINT_VERSION
+    id("org.jlleitschuh.gradle.ktlint-idea") version Versions.KT_LINT_VERSION
+    id("java-test-fixtures")
+    id("org.jetbrains.kotlinx.kover") version Versions.KOVER_VERSION
     kotlin("jvm") version Versions.KOTLIN
-    kotlin("plugin.spring") version Versions.KOTLIN apply false
-    kotlin("plugin.jpa") version Versions.KOTLIN apply false
     kotlin("kapt") version Versions.KOTLIN
+    kotlin("plugin.spring") version Versions.KOTLIN
+    kotlin("plugin.jpa") version Versions.KOTLIN
 }
 
 allprojects {
@@ -17,18 +21,22 @@ allprojects {
 }
 
 subprojects {
-    apply(plugin = "java")
-    apply(plugin = "kotlin")
-    apply(plugin = "kotlin-kapt")
-    apply(plugin = "kotlin-spring")
-    apply(plugin = "kotlin-jpa")
-    apply(plugin = "org.springframework.boot")
-    apply(plugin = "io.spring.dependency-management")
+    apply {
+        plugin("org.springframework.boot")
+        plugin("io.spring.dependency-management")
+        plugin("java")
+        plugin("kotlin")
+        plugin("kotlin-kapt")
+        plugin("kotlin-spring")
+        plugin("kotlin-jpa")
+        plugin("org.jlleitschuh.gradle.ktlint")
+        plugin("org.jetbrains.kotlinx.kover")
+    }
 
     group = "com.kakaopaysec.happy-ending"
     version = "0.0.1-SNAPSHOT"
     java.sourceCompatibility = Versions.java
-    extra["springCloudVersion"] = "2022.0.3"
+    extra["springCloudVersion"] = "2022.0.1"
 
     dependencyManagement {
         imports {
@@ -37,17 +45,24 @@ subprojects {
     }
 
     dependencies {
+        implementation("org.springframework.boot:spring-boot-starter-actuator")
         implementation("org.springframework.boot:spring-boot-starter")
+        implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
         implementation("org.jetbrains.kotlin:kotlin-reflect")
-        testImplementation("org.springframework.boot:spring-boot-starter-test")
-      /*  implementation("io.awspring.cloud:spring-cloud-aws-starter:${Versions.AWS}")
+        implementation("io.awspring.cloud:spring-cloud-aws-starter:${Versions.AWS}")
         implementation(
             "io.awspring.cloud:spring-cloud-aws-starter-secrets-manager:" +
                 Versions.AWS_SECRETS_MANAGER_CONFIG
-        )*/
-        implementation("org.springframework.cloud:spring-cloud-starter-bootstrap:3.0.3")
-        implementation("org.springframework.cloud:spring-cloud-starter-aws-secrets-manager-config:2.2.6.RELEASE")
+        )
+        implementation("io.github.microutils:kotlin-logging:${Versions.KOTLIN_LOGGING}")
         implementation("software.amazon.awssdk:sts:${Versions.AWS_SDK_STS}")
+        annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
+        testImplementation("org.springframework.boot:spring-boot-starter-test") {
+            exclude(module = "mockito-core")
+        }
+        testImplementation("io.mockk:mockk:1.13.5")
+        testImplementation("com.ninja-squad:springmockk:4.0.2")
+        testImplementation("io.kotest:kotest-runner-junit5-jvm:5.6.2")
     }
 
     tasks {

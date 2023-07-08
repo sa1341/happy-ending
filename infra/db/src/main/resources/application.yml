@@ -1,0 +1,5 @@
+spring:
+  cloud:
+    aws:
+      secretsmanager:
+        region: ap-northeast-2

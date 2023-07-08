@@ -1,0 +1,13 @@
+spring:
+  config:
+    activate:
+      on-profile: sandbox
+    import:
+  cloud:
+    aws:
+      secretsmanager:
+        enabled: true
+
+test:
+  id: jeancalm
+  password: sandboxtest

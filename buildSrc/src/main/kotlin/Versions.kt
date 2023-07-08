@@ -6,7 +6,8 @@ object Versions {
     const val SPRING_DEPENDENCY_MANAGEMENT_VERSION = "1.1.0"
     const val SPRING_CLOUD = "2022.0.3"
 
-    const val KT_LINT_VERSION = "11.1.0"
+    const val KT_LINT_VERSION = "11.3.1"
+    const val KOVER_VERSION = "0.6.1"
     const val ASCII_DOCTOR_VERSION = "3.3.2"
 
     // language
@@ -15,7 +16,7 @@ object Versions {
 
     const val COMMONS_LANG3 = "3.12.0"
     const val JACKSON = "2.13.2"
-    const val KOTLIN_LOGGING = "2.1.21"
+    const val KOTLIN_LOGGING = "3.0.5"
     const val SENTRY_LOGGING = "6.3.1"
 
     const val RESILIENCE4J_VERSION = "2.0.2"

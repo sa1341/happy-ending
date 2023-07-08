@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: happy-ending-api
+  config:
+    import:
+      - metric.yml

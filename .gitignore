@@ -35,3 +35,8 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### 자동생성 파일 ###
+.DS_store
+**/logs/
+*.log

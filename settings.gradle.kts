@@ -1,4 +1,15 @@
 rootProject.name = "happy-ending"
 
 include(":app:happy-ending-api")
-include(":infra:db")
+include(":client:securities-client")
+include(
+    ":domain:account",
+    ":domain:withdrawal"
+)
+include(
+    ":infra:db",
+    ":infra:redis",
+    ":infra:kafka"
+)
+include(":support:metric")
+include(":support:utils")

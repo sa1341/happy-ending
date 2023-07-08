@@ -20,4 +20,3 @@ class HappyEndingApiApplication(
 fun main(args: Array<String>) {
     runApplication<HappyEndingApiApplication>(*args)
 }
-

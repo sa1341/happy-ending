@@ -1,0 +1,25 @@
+management:
+  health:
+    db:
+      enabled: false
+    redis:
+      enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: health, prometheus
+  metrics:
+    distribution:
+      percentiles:
+        http:
+          server:
+            requests: 0.5,0.9,0.95,0.99 # enable percentile
+      percentiles-histogram:
+        http:
+          server:
+            requests: false # disable percentile-histogram
+
+prometheus:
+  actuator:
+    username: secactbasecret
+    password: secretabtcacec
