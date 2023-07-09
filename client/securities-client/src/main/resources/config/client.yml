@@ -1,6 +1,6 @@
 spring.config.activate.on-profile: local
 base:
-  url: http://localhost:8080
+  url: http://localhost:8081
 ---
 spring.config.activate.on-profile: sandbox
 base:
