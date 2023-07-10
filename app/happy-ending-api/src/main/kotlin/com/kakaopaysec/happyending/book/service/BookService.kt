@@ -3,13 +3,11 @@ package com.kakaopaysec.happyending.book.service
 import com.kakaopaysec.happyending.book.dto.BookDto
 import com.kakaopaysec.happyending.global.error.BookNotFoundException
 import mu.KotlinLogging
-import org.springframework.http.HttpStatus
 import org.springframework.http.HttpStatusCode
 import org.springframework.http.MediaType
 import org.springframework.stereotype.Service
 import org.springframework.web.reactive.function.client.ClientResponse
 import org.springframework.web.reactive.function.client.WebClient
-import reactor.core.publisher.Signal.isError
 
 private val log = KotlinLogging.logger {}
 
