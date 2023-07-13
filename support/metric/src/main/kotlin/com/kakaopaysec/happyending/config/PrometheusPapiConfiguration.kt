@@ -22,6 +22,9 @@ class PrometheusPapiConfiguration(
     @Bean
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
         return http
+            .csrf {
+                it.disable()
+            }
             .authorizeHttpRequests { authCustomizer ->
                 authCustomizer
                     .requestMatchers("/actuator/prometheus")
