@@ -1,1 +1,11 @@
+### 계좌번호 조회 API
 GET localhost:8080/v1/account?accountId=1
+
+### 계좌조번호 조회 V2 API
+POST localhost:8080/v1/account/get
+Content-Type: application/json
+x-app-user-id: 209981
+
+{
+    "account_number": "02000162758"
+}

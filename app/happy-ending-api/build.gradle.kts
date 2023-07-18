@@ -24,6 +24,7 @@ dependencies {
 
     testImplementation("org.springframework.restdocs:spring-restdocs-asciidoctor")
     testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
+    testImplementation("org.springframework.restdocs:spring-restdocs-webtestclient")
 }
 
 val snippetsDir by extra { file("$buildDir/generated-snippets") }

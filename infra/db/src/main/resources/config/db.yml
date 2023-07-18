@@ -5,6 +5,11 @@ spring:
         region: ap-northeast-2
 ---
 spring.config.activate.on-profile: local
+test:
+  id: jean
+  password: local
+---
+spring.config.activate.on-profile: dev
 spring:
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/dokotlin?useSSL=false&useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Seoul

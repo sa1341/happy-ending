@@ -1,33 +1,38 @@
 package com.kakaopaysec.happyending.account.api
 
-import com.kakaopaysec.happyending.account.entity.Account
-import com.kakaopaysec.happyending.account.repository.AccountRepository
-import org.springframework.beans.factory.annotation.Qualifier
-import org.springframework.data.repository.findByIdOrNull
-import org.springframework.web.bind.annotation.GetMapping
+import com.kakaopaysec.happyending.account.service.AccountResponse
+import com.kakaopaysec.happyending.account.service.AccountService
+import com.kakaopaysec.happyending.config.PaySecUser
+import mu.KotlinLogging
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
-import org.springframework.web.reactive.function.client.WebClient
+
+private val log = KotlinLogging.logger {}
 
 @RequestMapping("/v1/account")
 @RestController
 class AccountApi(
-    @Qualifier("happyEndingClient")
-    private val webClient: WebClient,
-    private val accountRepository: AccountRepository
+    private val accountService: AccountService
 ) {
 
-    @GetMapping
-    fun getAccountInfo(@RequestParam(value = "accountId") accountId: Long): Account? {
-        return accountRepository.findByIdOrNull(accountId)
-    }
-
-    @GetMapping("/client-test")
-    fun getPensionAccount(): String {
-        return "hi"
+    @PostMapping("/get")
+    fun getPensionAccount(
+        paySecUser: PaySecUser,
+        @RequestBody accountNumber: AccountNumber
+    ): AccountResponse {
+        log.debug { "PaySecUser: $paySecUser, AccountNumber: ${accountNumber.accountNumber}" }
+        return accountService.getAccountNumber(
+            appUserId = paySecUser.appUserId,
+            accountNumber = accountNumber.accountNumber
+        )
     }
 }
+
+open class AccountNumber(
+    open val accountNumber: String
+)
 
 data class SecretDto(
     val id: String,
