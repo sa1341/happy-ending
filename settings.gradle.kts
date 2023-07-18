@@ -11,5 +11,8 @@ include(
     ":infra:redis",
     ":infra:kafka"
 )
-include(":support:metric")
-include(":support:utils")
+include(
+    ":support:metric",
+    ":support:utils",
+    ":support:testkit"
+)

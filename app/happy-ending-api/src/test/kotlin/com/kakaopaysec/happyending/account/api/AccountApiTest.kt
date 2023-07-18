@@ -1,11 +1,17 @@
 package com.kakaopaysec.happyending.account.api
 
+import com.fasterxml.jackson.databind.ObjectMapper
 import com.kakaopaysec.happyending.account.service.AccountResponse
 import com.kakaopaysec.happyending.account.service.AccountService
-import com.kakaopaysec.happyending.common.RestDocUtils
+import com.kakaopaysec.happyending.config.JacksonConfiguration
+import com.kakaopaysec.happyending.config.WebConfiguration
+import com.kakaopaysec.happyending.restdocs.RestDocUtils
+import com.kakaopaysec.happyending.restdocs.withPaySecAccount
 import com.ninjasquad.springmockk.MockkBean
 import io.mockk.every
 import org.junit.jupiter.api.Test
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.MediaType
 import org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document
@@ -16,10 +22,14 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
 @SpringBootTest(
-    classes = [AccountApi::class],
+    classes = [AccountApi::class, JacksonConfiguration::class, WebConfiguration::class],
     webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT
 )
 class AccountApiTest : RestDocUtils() {
+
+    @Autowired
+    @Qualifier("happyEndingObjectMapper")
+    lateinit var objectMapper: ObjectMapper
 
     @MockkBean
     private lateinit var accountService: AccountService
