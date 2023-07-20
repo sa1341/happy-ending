@@ -1,8 +1,13 @@
 package com.kakaopaysec.happyending.book.service
 
 import com.kakaopaysec.happyending.book.dto.BookDto
-import com.kakaopaysec.happyending.global.error.BookNotFoundException
+import com.kakaopaysec.happyending.common.SecuritiesCommon
+import com.kakaopaysec.happyending.config.CustomRetry
+import com.kakaopaysec.happyending.exception.SecuritiesErrorCode
+import com.kakaopaysec.happyending.exception.SecuritiesException
+import com.kakaopaysec.happyending.service.ServiceType
 import mu.KotlinLogging
+import org.springframework.http.HttpStatus
 import org.springframework.http.HttpStatusCode
 import org.springframework.http.MediaType
 import org.springframework.stereotype.Service
@@ -29,9 +34,10 @@ class BookService(
                 )
             }
             .bodyToFlux(BookDto::class.java)
+            .retryWhen(CustomRetry.create(ServiceType.GET_BOOK))
             .onErrorMap {
                 log.error { "Exception Type: $it ,error mapping" }
-                BookNotFoundException()
+                SecuritiesCommon.onErrorMap(it)
             }
             .blockFirst()
             ?.also {
@@ -41,7 +47,7 @@ class BookService(
                     |response: $it
                     """.trimIndent()
                 }
-            } ?: throw BookNotFoundException()
+            } ?: throw SecuritiesException.of(SecuritiesErrorCode.LEDGER_RESPONSE_DATA_NULL)
     }
 
     private fun onStatus(
@@ -55,12 +61,22 @@ class BookService(
         }
         runCatching {
             if (response.statusCode().is4xxClientError) {
-                BookNotFoundException()
+                SecuritiesException.of(
+                    httpStatus = HttpStatus.BAD_REQUEST,
+                    message = "잘못된 요청을 하셨습니다."
+                )
             } else {
-                BookNotFoundException()
+                SecuritiesException.of(
+                    httpStatus = HttpStatus.INTERNAL_SERVER_ERROR,
+                    message = "현재 서버에 접근할 수 없습니다."
+                )
             }
         }.recover {
-            BookNotFoundException()
+            SecuritiesException.of(
+                securitiesErrorCode = SecuritiesErrorCode.LEDGER_SERVER_ERROR,
+                cause = it,
+                message = "현재 서버에 접근할 수 없습니다."
+            )
         }.getOrThrow()
     }
 }
