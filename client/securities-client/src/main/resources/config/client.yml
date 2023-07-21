@@ -1,3 +1,49 @@
+happyending:
+  async:
+    core-pool-size: 4
+    max-pool-size: 32
+    queue-capacity: 128
+  webclient:
+    core-pool-size: 8
+    max-pool-size: 32
+    queue-capacity: 128
+    event-loop-thread-size: 4
+    max-connection: 128
+    timeout: 14
+
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        registerHealthIndicator: true
+        slidingWindowSize: 100
+        permittedNumberOfCallsInHalfOpenState: 10
+        slidingWindowType: COUNT_BASED
+        minimumNumberOfCalls: 30
+        waitDurationInOpenState: 10s
+        failureRateThreshold: 70
+        eventConsumerBufferSize: 10
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+        slowCallRateThreshold: 100
+        slowCallDurationThreshold: 60000
+        recordExceptions:
+          - java.util.concurrent.TimeoutException
+          - java.net.SocketTimeoutException
+          - io.netty.handler.timeout.ReadTimeoutException
+          - io.netty.channel.ConnectTimeoutException
+          - org.springframework.web.reactive.function.client.WebClientRequestException
+    instances:
+      securities:
+        base-config: default
+  timelimiter:
+    configs:
+      default:
+        cancelRunningFuture: true
+        timeoutDuration: 15s
+    instances:
+      instances:
+        base-config: default
+---
 spring.config.activate.on-profile: local
 base:
   url: http://localhost:8081

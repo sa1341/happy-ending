@@ -2,14 +2,6 @@ plugins {
     id("org.asciidoctor.jvm.convert") version Versions.ASCII_DOCTOR_VERSION
 }
 
-dependencyManagement {
-    dependencies {
-        dependencySet("io.github.resilience4j:2.0.2") {
-            entry("resilience4j-spring-boot3")
-        }
-    }
-}
-
 dependencies {
     implementation(project(":domain:account"))
     implementation(project(":domain:withdrawal"))
@@ -19,8 +11,6 @@ dependencies {
     implementation(project(":infra:kafka"))
     implementation(project(":support:metric"))
     implementation(project(":support:utils"))
-
-    implementation("io.github.resilience4j:resilience4j-spring-boot3")
 
     testImplementation("org.springframework.restdocs:spring-restdocs-asciidoctor")
     testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")

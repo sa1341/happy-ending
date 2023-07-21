@@ -4,5 +4,5 @@ enum class ServiceType(
     val url: String,
     val isRetry: Boolean
 ) {
-    GET_BOOK("/api/vc1/books", true);
+    GET_BOOK("/api/v1/books", true);
 }

@@ -1,0 +1,3 @@
+package com.kakaopaysec.happyending
+
+class AccountDomainConfiguration

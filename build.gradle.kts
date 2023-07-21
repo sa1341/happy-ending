@@ -39,6 +39,12 @@ subprojects {
     extra["springCloudVersion"] = "2022.0.1"
 
     dependencyManagement {
+        dependencies {
+            dependencySet("io.github.resilience4j:2.0.2") {
+                entry("resilience4j-spring-boot3")
+            }
+        }
+
         imports {
             mavenBom("org.springframework.cloud:spring-cloud-dependencies:${property("springCloudVersion")}")
         }
@@ -49,6 +55,9 @@ subprojects {
         implementation("org.springframework.boot:spring-boot-starter")
         implementation("org.springframework.boot:spring-boot-starter-web")
         implementation("org.springframework.boot:spring-boot-starter-webflux")
+        implementation("io.github.resilience4j:resilience4j-spring-boot3")
+        implementation("io.github.resilience4j:resilience4j-reactor")
+        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-slf4j")
         implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
         implementation("org.jetbrains.kotlin:kotlin-reflect")
         implementation("io.awspring.cloud:spring-cloud-aws-starter:${Versions.AWS}")
