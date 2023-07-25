@@ -5,7 +5,14 @@ spring:
     import:
       - db.yml
       - client.yml
-
+      - optional:vault://
+  cloud:
+    vault:
+      uri: http://localhost:8200
+      token: 00000000-0000-0000-0000-000000000000
+      kv:
+        backend: secret
+        default-context: application
 
 logging:
   level:

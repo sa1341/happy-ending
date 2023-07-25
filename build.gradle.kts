@@ -36,7 +36,7 @@ subprojects {
     group = "com.kakaopaysec.happy-ending"
     version = "0.0.1-SNAPSHOT"
     java.sourceCompatibility = Versions.java
-    extra["springCloudVersion"] = "2022.0.1"
+    extra["springCloudVersion"] = "2022.0.3"
 
     dependencyManagement {
         dependencies {
@@ -60,12 +60,6 @@ subprojects {
         implementation("org.jetbrains.kotlinx:kotlinx-coroutines-slf4j")
         implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
         implementation("org.jetbrains.kotlin:kotlin-reflect")
-        implementation("io.awspring.cloud:spring-cloud-aws-starter:${Versions.AWS}")
-        implementation(
-            "io.awspring.cloud:spring-cloud-aws-starter-secrets-manager:" +
-                Versions.AWS_SECRETS_MANAGER_CONFIG
-        )
-        implementation("software.amazon.awssdk:sts:${Versions.AWS_SDK_STS}")
         implementation("io.github.microutils:kotlin-logging:${Versions.KOTLIN_LOGGING}")
         annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
         testImplementation("org.springframework.boot:spring-boot-starter-test") {

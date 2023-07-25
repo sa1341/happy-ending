@@ -12,6 +12,8 @@ dependencies {
     implementation(project(":support:metric"))
     implementation(project(":support:utils"))
 
+    implementation("org.springframework.cloud:spring-cloud-starter-vault-config")
+
     testImplementation("org.springframework.restdocs:spring-restdocs-asciidoctor")
     testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
     testImplementation("org.springframework.restdocs:spring-restdocs-webtestclient")
