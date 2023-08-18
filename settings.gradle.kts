@@ -14,5 +14,6 @@ include(
 include(
     ":support:metric",
     ":support:utils",
-    ":support:testkit"
+    ":support:testkit",
+    ":support:yaml-importer"
 )

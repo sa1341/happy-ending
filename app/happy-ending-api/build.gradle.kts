@@ -11,6 +11,7 @@ dependencies {
     implementation(project(":infra:kafka"))
     implementation(project(":support:metric"))
     implementation(project(":support:utils"))
+    implementation(project(":support:yaml-importer"))
 
     implementation("org.springframework.cloud:spring-cloud-starter-vault-config")
 
