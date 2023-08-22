@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<included>
+    <appender name="APP_JSON_LOG_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>%message%n</pattern>
+            <immediateFlush>true</immediateFlush>
+        </encoder>
+        <file>${application.log.dir:-logs}/json_application_${HOSTNAME}_${port:-default}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>
+                ${application.log.dir:-logs}/json_application_${HOSTNAME}_${port:-default}.log.%i.%d{yyyy-MM-dd}.gz
+            </fileNamePattern>
+            <maxFileSize>500MB</maxFileSize>
+            <maxHistory>180</maxHistory>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="ASYNC_APP_JSON_LOG_FILE" class="ch.qos.logback.classic.AsyncAppender">
+        <appender-ref ref="APP_JSON_LOG_FILE" />
+    </appender>
+</included>

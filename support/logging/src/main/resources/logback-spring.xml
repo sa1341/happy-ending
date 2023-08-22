@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <springProperty scope="context" name="ACTIVE_PROFILE" source="spring.config.activate.on-profile"/>
+    <springProperty scope="context" name="SENTRY_DSN" source="sentry.dsn"/>
+    <springProfile scope="context" name="port" source="server.port"/>
+    <springProfile scope="context" name="SERVER_NAME" source="spring.application.name"/>
+
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
+
+    <include resource="logback/consoleAppender.xml"/>
+    <include resource="logback/fileAppender.xml"/>
+    <include resource="logback/jsonAppender.xml"/>
+    <include resource="logback/sentryAppender.xml"/>
+
+    <logger name="org.springframework" level="INFO"/>
+    <logger name="org.springframework.cloud.vault" level="DEBUG"/>
+    <logger name="io.lettuce.core" level="INFO"/>
+    <logger name="io.lettuce.core.protocol" level="WARN"/>
+    <logger name="org.hibernate.engine" level="INFO" />
+    <logger name="org.hibernate.loader" level="INFO" />
+    <logger name="org.hibernate.internal.util" level="INFO" />
+    <logger name="java.net" level="ERROR" />
+
+    <springProfile name="default, local, test">
+        <root level="INFO">
+            <appender-ref ref="CONSOLE"/>
+        </root>
+        <logger name="org.hibernate.orm.jdbc.bind" level="TRACE"/>
+        <logger name="com.zaxxer.hikari.pool" level="INFO"/>
+        <logger name="com.kakaopaysec.happyending" level="DEBUG"/>
+    </springProfile>
+    <springProfile name="dev, sandbox">
+        <root level="INFO">
+            <appender-ref ref="CONSOLE"/>
+            <appender-ref ref="ASYNC_FILE"/>
+            <appender-ref ref="SENTRY"/>
+        </root>
+        <logger name="app-json-logger" level="INFO" additivity="false">
+            <appender-ref ref="ASYNC_APP_JSON_LOG_FILE"/>
+        </logger>
+        <logger name="com.zaxxer.hikari.pool" level="WARN"/>
+        <logger name="sun.net.www.protocol.http.HttpURLConnection" level="TRACE"/>
+        <logger name="com.kakaopaysec.happyending" level="DEBUG"/>
+    </springProfile>
+    <springProfile name="beta, production">
+        <root level="INFO">
+            <appender-ref ref="CONSOLE"/>
+            <appender-ref ref="ASYNC_FILE"/>
+            <appender-ref ref="SENTRY"/>
+        </root>
+        <logger name="app-json-logger" level="INFO" additivity="false">
+            <appender-ref ref="ASYNC_APP_JSON_LOG_FILE"/>
+        </logger>
+        <logger name="com.kakaopaysec.happyending" level="INFO"/>
+    </springProfile>
+</configuration>

@@ -1,7 +1,7 @@
 package com.kakaopaysec.happyending.config
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.kakaopaysec.utils.GuidUtils
+import com.kakaopaysec.happyending.utils.GuidUtils
 import io.netty.channel.ChannelOption
 import io.netty.handler.timeout.ReadTimeoutHandler
 import io.netty.handler.timeout.WriteTimeoutHandler

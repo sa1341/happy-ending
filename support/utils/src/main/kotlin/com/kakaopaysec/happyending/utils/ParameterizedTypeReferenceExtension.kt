@@ -1,4 +1,4 @@
-package com.kakaopaysec.utils
+package com.kakaopaysec.happyending.utils
 
 import org.springframework.core.ParameterizedTypeReference
 

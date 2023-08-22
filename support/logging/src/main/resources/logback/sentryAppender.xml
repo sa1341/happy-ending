@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<included>
+    <springProfile name="dev, sandbox, beta, production">
+        <appender name="SENTRY" class="io.sentry.logback.SentryAppender">
+            <minimumEventLevel>WARN</minimumEventLevel>
+            <options>
+                <dsn>
+                    <dsn>${SENTRY_DSN}</dsn>
+                </dsn>
+                <serverName>${ACTIVE_PROFILE}-${SERVER_NAME}</serverName>
+            </options>
+        </appender>
+    </springProfile>
+</included>

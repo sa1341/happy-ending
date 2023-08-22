@@ -1,0 +1,26 @@
+version: '3.9'
+
+services:
+  happy-ending-redis:
+    container_name: happy-ending-redis
+    platform: linux/amd64
+    restart: always
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+  happy-ending-mysql:
+    user: 1001:1001
+    container_name: happy-ending-mysql
+    platform: linux/amd64
+    image: mysql:8
+    environment:
+      - "MYSQL_ROOT_PASSWORD=happy"
+      - "MYSQL_DATABASE=happy-ending"
+      - "MYSQL_USER=happy"
+      - "MYSQL_PASSWORD=happy"
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./sql/:/docker-entrypoint-initdb.d/
+      - ./happy_ending_db:/var/lib/mysql
+      - ./custom.cnf:/etc/mysql/conf.d/custom.cnf

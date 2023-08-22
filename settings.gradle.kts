@@ -13,6 +13,7 @@ include(
 )
 include(
     ":support:metric",
+    ":support:logging",
     ":support:utils",
     ":support:testkit",
     ":support:yaml-importer"

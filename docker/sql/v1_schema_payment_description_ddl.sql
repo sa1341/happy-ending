@@ -1,0 +1,220 @@
+CREATE TABLE payment_description_c_records
+(
+    record_id            BIGINT UNSIGNED  NOT NULL AUTO_INCREMENT
+    , acno		VARCHAR(11) NOT NULL COMMENT '계좌번호'
+    , tr_dt		VARCHAR(8) NOT NULL COMMENT '거래일자'
+    , tr_s		BIGINT NOT NULL COMMENT '거래순번'
+    , txn_s		BIGINT NOT NULL COMMENT '과세순번'
+    , tr_cncl_yn		CHAR(1) DEFAULT 'N' NOT NULL COMMENT '거래취소여부'
+    , flct_dat_tcd		CHAR(1) NULL COMMENT '변동자료구분코드'
+    , rppn_tcd		VARCHAR(2) NULL COMMENT '거주자구분코드'
+    , eabbr_ctry_cod		VARCHAR(2) NULL COMMENT '영문약어국가코드'
+    , py_items_nrf_tcd		CHAR(1) NULL COMMENT '지급명세내외국인구분코드'
+    , suc_yn		CHAR(1) DEFAULT 'N' NOT NULL COMMENT '승계여부'
+    , me_ac_yn		CHAR(1) DEFAULT 'N' NOT NULL COMMENT '의료비계좌여부'
+    , pnsa_acp_strt_rqs_dt		VARCHAR(8) NULL COMMENT '연금수령개시신청일자'
+    , dpnt_pan_ea		DECIMAL(26,4) NOT NULL COMMENT '소수점연금계좌평가금액'
+    , pnsa_acp_cntf_yr		VARCHAR(4) NULL COMMENT '연금수령기산년도'
+    , pan_join_toy_pcd		CHAR(1) NULL COMMENT '연금계좌가입시기유형코드'
+    , pnsa_acp_odyr_vl		INT DEFAULT 0 NOT NULL COMMENT '연금수령연차값'
+    , try_pnsa_acp_lmt_a		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '당해년도연금수령한도금액'
+    , pnsa_rl_acp_odyr_vl		INT DEFAULT 0 NOT NULL COMMENT '연금실제수령연차값'
+    , icm_impd_ym		VARCHAR(6) NULL COMMENT '소득귀속년월'
+    , rtmt_icm_a		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '퇴직소득금액'
+    , pnsa_acp_txn_exp_a		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '연금수령과세제외금액'
+    , pnsa_acp_tad_a		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '연금수령세액이연금액'
+    , pnsa_acp_chd_a		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '연금수령전환이연금액'
+    , pnsa_acp_txdc_a		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '연금수령세액공제금액'
+    , me_wthd_txn_exp_a		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '의료비인출과세제외금액'
+    , me_wthd_tad_a		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '의료비인출세액이연금액'
+    , me_wthd_chd_a		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '의료비인출전환이연금액'
+    , me_wthd_txdc_a		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '의료비인출세액공제금액'
+    , invt_rsn_txn_exp_a		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '부득이한사유과세제외금액'
+    , invt_rsn_tad_a		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '부득이한사유세액이연금액'
+    , invt_rsn_chd_a		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '부득이한사유전환이연금액'
+    , invt_rsn_txdc_a		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '부득이한사유세액공제금액'
+    , pnsa_oth_acp_txn_exp_a		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '연금이외수령과세제외금액'
+    , pnsa_oth_acp_tad_a		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '연금이외수령세액이연금액'
+    , pnsa_oth_acp_chd_a		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '연금이외수령전환이연금액'
+    , pnsa_oth_acp_txdc_a		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '연금이외수령세액공제금액'
+    , spcl_rsn_tcd		CHAR(1) NULL COMMENT '특별사유구분코드'
+    , pnsa_oth_acp_ac_abnd_yn		CHAR(1) DEFAULT 'N' NOT NULL COMMENT '연금이외수령계좌해지여부'
+    , pnsa_oth_acp_pat_wthd_yn		CHAR(1) DEFAULT 'N' NOT NULL COMMENT '연금이외수령일부인출여부'
+    , pnsa_oth_acp_lmt_over_yn		CHAR(1) DEFAULT 'N' NOT NULL COMMENT '연금이외수령한도초과여부'
+    , txn_exp_a		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '과세제외금액'
+    , pnsa_icm_tad_py_a		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '연금소득세액이연지급금액'
+    , pnsa_icm_tad_txr		DECIMAL(15,6) DEFAULT 0 NOT NULL COMMENT '연금소득세액이연세율'
+    , pnsa_icm_tad_ta		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '연금소득세액이연세액'
+    , pnsa_icm_chd_py_a		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '연금소득전환이연지급금액'
+    , pnsa_icm_chd_txr		DECIMAL(15,6) DEFAULT 0 NOT NULL COMMENT '연금소득전환이연세율'
+    , pnsa_icm_chd_ta		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '연금소득전환이연세액'
+    , percent3_py_a		DECIMAL(26,4) DEFAULT 0 NOT NULL
+    , percent3_ta		DECIMAL(26,4) DEFAULT 0 NOT NULL
+    , percent4_py_a		DECIMAL(26,4) DEFAULT 0 NOT NULL
+    , percent4_ta		DECIMAL(26,4) DEFAULT 0 NOT NULL
+    , percent5_py_a		DECIMAL(26,4) DEFAULT 0 NOT NULL
+    , percent5_ta		DECIMAL(26,4) DEFAULT 0 NOT NULL
+    , rtmt_icm_tad_py_a		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '퇴직소득세액이연지급금액'
+    , rtmt_icm_tad_txr		DECIMAL(15,6) DEFAULT 0 NOT NULL COMMENT '퇴직소득세액이연세율'
+    , rtmt_icm_tad_ta		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '퇴직소득세액이연세액'
+    , rtmt_icm_chd_py_a		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '퇴직소득전환이연지급금액'
+    , rtmt_icm_chd_txr		DECIMAL(15,6) DEFAULT 0 NOT NULL COMMENT '퇴직소득전환이연세율'
+    , rtmt_icm_chd_ta		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '퇴직소득전환이연세액'
+    , dpnt_rtmt_icm_py_a		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '소수점퇴직소득지급금액'
+    , dpnt_rtmt_intx		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '소수점퇴직소득세'
+    , etc_icm_pnsa_oth_py_a		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '기타소득연금이외지급금액'
+    , etc_icm_pnsa_oth_ta		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '기타소득연금이외세액'
+    , pnsa_icm_agtxn_py_a		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '연금소득종합과세지급금액'
+    , pnsa_icm_sptxn_py_a		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '연금소득분리과세지급금액'
+    , pnsa_intx		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '연금소득세'
+    , pnsa_icm_litx		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '연금소득지방소득세'
+    , dpnt_pnsa_intx_sum_a		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '소수점연금소득세합계금액'
+    , rtmt_icm_py_a		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '퇴직소득지급금액'
+    , rtmt_intx		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '퇴직소득세'
+    , rtmt_icm_litx		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '퇴직소득지방소득세'
+    , dpnt_rix_sum_a		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '소수점퇴직소득세합계금액'
+    , etc_icm_py_a		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '기타소득지급금액'
+    , dpnt_etc_intx		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '소수점기타소득세'
+    , dpnt_etc_icm_litx		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '소수점기타소득지방소득세'
+    , dpnt_etc_intx_sum_a		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '소수점기타소득세합계금액'
+    , levy_rbr_tcd		VARCHAR(2) NULL COMMENT '징수환급구분코드'
+    , levy_rbr_otr_dt		VARCHAR(8) NULL COMMENT '징수환급원거래일자'
+    , levy_rbr_otr_s		BIGINT DEFAULT 0 NOT NULL COMMENT '징수환급원거래순번'
+    , levy_rbr_otr_ss		BIGINT DEFAULT 0 NOT NULL COMMENT '징수환급원거래부순번'
+    , levy_rbr_obj_tr_dt		VARCHAR(8) NULL COMMENT '징수환급대상거래일자'
+    , levy_rbr_obj_tr_s		BIGINT DEFAULT 0 NOT NULL COMMENT '징수환급대상거래순번'
+    , levy_rbr_obj_tr_ss		BIGINT DEFAULT 0 NOT NULL COMMENT '징수환급대상거래부순번'
+    , wker_id		VARCHAR(100) NOT NULL COMMENT '작업자ID'
+    , wrk_tmnl_id		VARCHAR(9) NOT NULL COMMENT '작업단말ID'
+    , wrk_dl_dttm		VARCHAR(17) NOT NULL COMMENT '작업상세일시'
+    , GUID		VARCHAR(32) NOT NULL COMMENT 'GUID'
+    , whld_prmkey_cn		VARCHAR(200) NULL COMMENT '원천징수예정키내용'
+    , rbr_yn		VARCHAR(1) NULL COMMENT '환급여부'
+    , org_pnsa_icm_tad_ta		DECIMAL(26,4) NULL COMMENT '원연금소득세액이연세액'
+    , org_pnsa_icm_chd_ta		DECIMAL(26,4) NULL COMMENT '원연금소득전환이연세액'
+    , org_percent3_ta		DECIMAL(26,4) NULL
+    , org_percent4_ta		DECIMAL(26,4) NULL
+    , org_percent5_ta		DECIMAL(26,4) NULL
+    , org_rtmt_icm_tad_ta		DECIMAL(26,4) NULL COMMENT '원퇴직소득세액이연세액'
+    , org_rtmt_icm_chd_ta		DECIMAL(26,4) NULL COMMENT '원퇴직소득전환이연세액'
+    , org_dpnt_rix		DECIMAL(26,4) NULL COMMENT '원소수점퇴직소득세'
+    , org_etc_icm_pnsa_oth_ta		DECIMAL(26,4) NULL COMMENT '원기타소득연금이외세액'
+    , org_pnsa_intx		DECIMAL(26,4) NULL COMMENT '원연금소득세'
+    , org_pnsa_icm_litx		DECIMAL(26,4) NULL COMMENT '원연금소득지방소득세'
+    , org_dpnt_pnsa_intx_sum_a		DECIMAL(26,4) NULL COMMENT '원소수점연금소득세합계금액'
+    , org_rix		DECIMAL(26,4) NULL COMMENT '원퇴직소득세'
+    , org_rtmt_icm_litx		DECIMAL(26,4) NULL COMMENT '원퇴직소득지방소득세'
+    , org_dpnt_rix_sum_a		DECIMAL(26,4) NULL COMMENT '원소수점퇴직소득세합계금액'
+    , org_dpnt_etc_intx		DECIMAL(26,4) NULL COMMENT '원소수점기타소득세'
+    , org_dpnt_etc_icm_litx		DECIMAL(26,4) NULL COMMENT '원소수점기타소득지방소득세'
+    , org_dpnt_etc_intx_sum_a		DECIMAL(26,4) NULL COMMENT '원소수점기타소득세합계금액'
+    , PRIMARY KEY (`record_id`)
+    , UNIQUE KEY `payment_description_c_records_ux_1` (`acno`, `tr_dt`, `tr_s`, `txn_s`)
+) ENGINE = InnoDB
+COMMENT ='연금 지급명세서 C레코드';
+
+CREATE TABLE payment_description_d_records
+(
+    record_id            BIGINT UNSIGNED  NOT NULL AUTO_INCREMENT
+    , acno		VARCHAR(11) NOT NULL COMMENT '계좌번호'
+    , bas_yr		VARCHAR(4) NOT NULL COMMENT '기준년도'
+    , crn_dt		VARCHAR(8) NOT NULL COMMENT '생성일자'
+    , crn_s		BIGINT NOT NULL COMMENT '생성순번'
+    , past_txn_exp_inc_trf_a		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '과거과세제외증가이체금액'
+    , past_txn_exp_inc_mnyi_a		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '과거과세제외증가입금금액'
+    , past_txn_exp_dcr_trf_a		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '과거과세제외감소이체금액'
+    , past_txn_exp_dcr_wthd_a		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '과거과세제외감소인출금액'
+    , tstrm_txn_exp_inc_trf_a		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '당기과세제외증가이체금액'
+    , tstrm_txn_exp_inc_mnyi_a		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '당기과세제외증가입금금액'
+    , tstrm_txn_exp_dcr_trf_a		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '당기과세제외감소이체금액'
+    , tstrm_txn_exp_dcr_wthd_a		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '당기과세제외감소인출금액'
+    , past_chd_rtmt_inc_trf_a		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '과거전환이연퇴직증가이체금액'
+    , past_chd_rtmt_inc_mnyi_a		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '과거전환이연퇴직증가입금금액'
+    , past_chd_rtmt_dcr_trf_a		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '과거전환이연퇴직감소이체금액'
+    , past_chd_rtmt_dcr_wthd_a		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '과거전환이연퇴직감소인출금액'
+    , tstrm_chd_rtmt_inc_trf_a		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '당기전환이연퇴직증가이체금액'
+    , tstrm_chd_rtmt_inc_mnyi_a		DECIMAL(26,4) NOT NULL COMMENT '당기전환이연퇴직증가입금금액'
+    , tstrm_chd_rtmt_dcr_trf_a		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '당기전환이연퇴직감소이체금액'
+    , tstrm_chd_rtmt_dcr_wthd_a		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '당기전환이연퇴직감소인출금액'
+    , past_tad_rtmt_inc_trf_a		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '과거세액이연퇴직증가이체금액'
+    , past_tad_rtmt_inc_mnyi_a		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '과거세액이연퇴직증가입금금액'
+    , past_tad_rtmt_dcr_trf_a		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '과거세액이연퇴직감소이체금액'
+    , past_tad_rtmt_dcr_wthd_a		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '과거세액이연퇴직감소인출금액'
+    , tstrm_tad_rtmt_inc_trf_a		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '당기세액이연퇴직증가이체금액'
+    , tstrm_tad_rtmt_inc_mnyi_a		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '당기세액이연퇴직증가입금금액'
+    , tstrm_tad_rtmt_dcr_trf_a		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '당기세액이연퇴직감소이체금액'
+    , tstrm_tad_rtmt_dcr_wthd_a		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '당기세액이연퇴직감소인출금액'
+    , past_txdc_inc_trf_a		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '과거세액공제증가이체금액'
+    , past_txdc_inc_mnyi_a		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '과거세액공제증가입금금액'
+    , past_txdc_dcr_trf_a		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '과거세액공제감소이체금액'
+    , past_txdc_dcr_wthd_a		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '과거세액공제감소인출금액'
+    , tstrm_txdc_inc_trf_a		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '당기세액공제증가이체금액'
+    , tstrm_txdc_inc_mnyi_a		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '당기세액공제증가입금금액'
+    , tstrm_txdc_dcr_trf_a		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '당기세액공제감소이체금액'
+    , tstrm_txdc_dcr_wthd_a		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '당기세액공제감소인출금액'
+    , or_ern_bef_eot_ba		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '운용수익전기말잔액'
+    , or_ern_tstrm_ba		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '운용수익당기잔액'
+    , tr_dt		VARCHAR(8) NULL COMMENT '거래일자'
+    , tr_s		BIGINT NULL COMMENT '거래순번'
+    , infortn_yn		CHAR(1) NULL COMMENT '지급조서여부'
+    , wker_id		VARCHAR(100) NOT NULL COMMENT '작업자ID'
+    , wrk_tmnl_id		VARCHAR(9) NOT NULL COMMENT '작업단말ID'
+    , wrk_dl_dttm		VARCHAR(17) NOT NULL COMMENT '작업상세일시'
+    , guid		VARCHAR(32) NOT NULL COMMENT 'GUID'
+    , PRIMARY KEY (`record_id`)
+    , UNIQUE KEY `payment_description_d_records_ux_1` (`acno`, `bas_yr`, `crn_dt`, `crn_s`)
+    , KEY `payment_description_d_records_idx_1` (`tr_dt`, `tr_s`, `acno`)
+) ENGINE = InnoDB
+COMMENT ='연금 지급명세서 D레코드';
+
+CREATE TABLE payment_description_g_records
+(
+    record_id            BIGINT UNSIGNED  NOT NULL AUTO_INCREMENT
+    , acno		VARCHAR(11) NOT NULL COMMENT '계좌번호'
+    , rtmt_sbdo_data_tcd		CHAR(2) NOT NULL COMMENT '퇴직부표데이터구분코드'
+    , bas_yr		VARCHAR(4) NOT NULL COMMENT '기준년도'
+    , crn_dt		VARCHAR(8) NOT NULL COMMENT '생성일자'
+    , crn_s		BIGINT NOT NULL COMMENT '생성순번'
+    , dfr_rtmt_icm_tcd		CHAR(1) NOT NULL COMMENT '이연퇴직소득구분코드'
+    , dfr_rtmt_icm_inc_tmod		INT DEFAULT 0 NOT NULL COMMENT '이연퇴직소득증가회차'
+    , dfr_rtmt_icm_ina		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '이연퇴직소득증가금액'
+    , dfr_rtmt_intx_ina		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '이연퇴직소득세증가금액'
+    , dfr_rtmt_icm_a		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '이연퇴직소득금액'
+    , dfr_rtmt_intx		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '이연퇴직소득세'
+    , dfr_rtmt_icm_pnsa_oth_acp_txr		DECIMAL(15,6) DEFAULT 0 NOT NULL COMMENT '이연퇴직소득연금이외수령세율'
+    , dfr_rtmt_icm_dea		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '이연퇴직소득감소금액'
+    , dfr_rtmt_intx_dea		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '이연퇴직소득세감소금액'
+    , dfr_rtmt_icm_ba		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '이연퇴직소득잔액'
+    , dfr_rtmt_intx_ba		DECIMAL(26,4) DEFAULT 0 NOT NULL COMMENT '이연퇴직소득세잔액'
+    , tr_dt		VARCHAR(8) NULL COMMENT '거래일자'
+    , tr_s		BIGINT NULL COMMENT '거래순번'
+    , infortn_yn		CHAR(1) NULL COMMENT '지급조서여부'
+    , wker_id		VARCHAR(100) NOT NULL COMMENT '작업자ID'
+    , wrk_tmnl_id		VARCHAR(9) NOT NULL COMMENT '작업단말ID'
+    , wrk_dl_dttm		VARCHAR(17) NOT NULL COMMENT '작업상세일시'
+    , guid		VARCHAR(32) NOT NULL COMMENT 'GUID'
+    , PRIMARY KEY (`record_id`)
+    , UNIQUE KEY `payment_description_g_records_ux_1` (`acno`, `rtmt_sbdo_data_tcd`, `bas_yr`, `crn_dt`, `crn_s`)
+    , KEY `payment_description_g_records_idx_1` (`tr_dt`, `tr_s`, `acno`)
+) ENGINE = InnoDB
+COMMENT ='연금 지급명세서 G레코드';
+
+CREATE TABLE payment_description_final_records
+(
+    record_id               BIGINT UNSIGNED  NOT NULL AUTO_INCREMENT
+    , icm_impd_yr VARCHAR(4) NOT NULL COMMENT '귀속년도'
+    , record_type VARCHAR(11) NOT NULL COMMENT '계좌번호'
+    , acno		VARCHAR(11) NULL COMMENT '계좌번호'
+    , tr_dt		VARCHAR(8) NULL COMMENT '거래일자'
+    , tr_s		BIGINT NULL COMMENT '거래순번'
+    , record_content	VARCHAR(1000) NOT NULL COMMENT '레코드내용'
+    , request_terminal_type   VARCHAR(20)      NOT NULL DEFAULT 'UNKNOWN' COMMENT '처리단말구분'
+    , created_by              VARCHAR(45)      NOT NULL COMMENT '생성자'
+    , updated_by              VARCHAR(45)      NOT NULL COMMENT '최종수정자'
+    , created_at              DATETIME         NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '생성시간'
+    , updated_at              DATETIME         NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '최종수정시간'
+    , PRIMARY KEY (`record_id`)
+    , UNIQUE KEY `payment_description_final_records_ux_1` (`icm_impd_yr`, `record_type`, `acno`, `tr_dt`, `tr_s`)
+    , KEY `payment_description_final_records_idx_1` (`tr_dt`, `tr_s`, `acno`)
+) ENGINE = InnoDB
+COMMENT ='연금 지급명세서 최종 레코드';                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     ', 'BATCH', 'BATCH');

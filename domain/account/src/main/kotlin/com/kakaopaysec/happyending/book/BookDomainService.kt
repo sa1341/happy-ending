@@ -3,7 +3,7 @@ package com.kakaopaysec.happyending.book
 import com.kakaopaysec.happyending.book.model.Book
 import com.kakaopaysec.happyending.service.SecuritiesClientService
 import com.kakaopaysec.happyending.service.ServiceType
-import com.kakaopaysec.utils.typeReference
+import com.kakaopaysec.happyending.utils.typeReference
 import org.springframework.stereotype.Component
 
 @Component

@@ -1,4 +1,4 @@
-package com.kakaopaysec.utils
+package com.kakaopaysec.happyending.utils
 
 import java.time.format.DateTimeFormatter
 import java.time.format.DateTimeFormatterBuilder
@@ -26,4 +26,6 @@ object DateTimeUtils {
         .appendValue(ChronoField.MINUTE_OF_HOUR, 2)
         .appendValue(ChronoField.SECOND_OF_MINUTE, 2)
         .toFormatter()
+
+    val yyyyMMddTHHmmssSSSBar: DateTimeFormatter = DateTimeFormatter.ofPattern("YYYY-MM-dd'T'HH:mm:ss.SSS")
 }

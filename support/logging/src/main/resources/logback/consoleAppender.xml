@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<included>
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <!--@formatter:off-->
+            <charset>UTF-8</charset>
+            <pattern>[${HOSTNAME}:%d{yyyy-MM-dd HH:mm:ss.SSS}] %level [%logger{5}:%method:%L][%.5thread][%X{transaction-id}] %msg%n</pattern>
+            <!--@formatter:on-->
+        </encoder>
+    </appender>
+</included>
