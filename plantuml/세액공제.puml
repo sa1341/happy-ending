@@ -1,0 +1,46 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+skinparam ParticipantPadding 20
+skinparam BoxPadding 10
+
+box "연금저축펀드" #Transparent
+actor Alice
+boundary 모바일앱 as MOBILE
+boundary "연금저축펀드 API" as PENSION
+boundary "연금저축펀드 증권 API" as SECURITIES
+end box
+
+== 연금저축계좌홈 - 예상세액공제 ==
+autonumber
+Alice -> MOBILE: 연금저축계좌 홈진입
+activate MOBILE #FFBBBB
+MOBILE -> PENSION: POST 세액공제 예상금액 조회
+    activate MOBILE #LightSalmon
+    activate PENSION #LightSalmon
+        PENSION -> PENSION: <<createRequest>>
+        PENSION -> SECURITIES ++: PPPQ9310	연금저축계좌 세액공제 예상금액 조회
+        return 세액공제 예상금액
+        PENSION <-- PENSION: <<createResponse>>
+        return 세액공제 예상금액
+    deactivate PENSION
+    return 세액공제 예상금액
+    deactivate MOBILE
+deactivate MOBILE
+|||
+Alice -> MOBILE: 세액공제율 변경
+activate MOBILE #FFBBBB
+    MOBILE -> MOBILE: 세액공제율 설정 화면으로 이동
+    activate MOBILE #DarkSalmon
+        MOBILE -> PENSION: POST 계좌정보저장
+        activate PENSION #DarkSalmon
+            PENSION -> PENSION: <<createRequest>>
+            PENSION -> SECURITIES ++: PPPU9000 연금저축계좌 정보 등록/수정
+            return 계좌번호, 연금개시가능연령, 연금납입한도, 연간소득구분
+            PENSION <-- PENSION: <<createResponse>>
+            return 계좌번호, 연금개시가능연령, 연금납입한도, 연간소득구분
+            ref over MOBILE, PENSION, SECURITIES: 세액공제 예상금액 조회
+        deactivate PENSION
+    deactivate MOBILE
+deactivate MOBILE
+@enduml

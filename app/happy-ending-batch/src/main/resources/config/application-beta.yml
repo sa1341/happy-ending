@@ -1,0 +1,18 @@
+spring:
+  config:
+    activate:
+      on-profile: beta
+    import:
+      - optional:vault://
+      - mysql.yml
+      - klack-client.yml
+  cloud:
+    vault:
+      uri: http://localhost:8200
+      token: 00000000-0000-0000-0000-000000000000
+      kv:
+        backend: secret
+        default-context: application
+
+sentry:
+  dsn:

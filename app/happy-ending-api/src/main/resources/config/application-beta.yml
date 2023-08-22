@@ -3,5 +3,5 @@ spring:
     activate:
       on-profile: beta
     import:
-      - db.yml
+      - mysql.yml
       - client.yml

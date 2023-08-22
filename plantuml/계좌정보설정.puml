@@ -1,0 +1,231 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+skinparam ParticipantPadding 20
+skinparam BoxPadding 10
+
+box "연금저축펀드" #Transparent
+actor Alice
+boundary 모바일앱 as MOBILE
+boundary "연금저축펀드 API" as PENSION
+boundary "연금저축펀드 증권 API" as SECURITIES
+end box
+
+== 계좌개설 ==
+autonumber
+Alice -> MOBILE: 인트로 페이지 진입 & 계좌개설 버튼 클릭
+create boundary "증권플랫폼 화면" as BUFFETFE
+MOBILE -> BUFFETFE ++: 계좌개설 화면으로 이동
+return 계좌개설여부
+alt 계좌개설 성공
+ Alice <-- MOBILE: 계좌개설 완료
+else 계좌개설 실패
+ Alice <-- MOBILE: 계좌개설 실패
+end
+
+Alice -> Alice: 머니2.0/연금저축계좌 개설
+... 시간이 흐른 뒤 ...
+
+== 연금저축펀드 계좌정보 설정 ==
+Alice -> MOBILE: 계좌정보입력
+activate MOBILE #FFBBBB
+    MOBILE -> PENSION: POST 연금수령개시연령, 연간납입한도 최소/최대 입력값 조회
+    activate MOBILE #LightSalmon
+    activate PENSION #LightSalmon
+        PENSION -> PENSION: <<createRequest>>
+        PENSION -> SECURITIES ++: PPPQ9002 연금저축계좌 개시가능일자 및 개시가능연령 조회
+        return 연금개시가능일자, 연금개시가능연령, 연간납입한도 최소값, 연간납입한도 최대값
+        PENSION <-- PENSION: <<createResponse>>
+        return  연금개시가능일자, 연금개시가능연령, 연간납입한도 최소값, 연간납입한도 최대값
+    deactivate PENSION
+    deactivate MOBILE
+    |||
+    MOBILE -> PENSION: POST 계좌정보저장
+    activate MOBILE #DarkSalmon
+    activate PENSION #DarkSalmon
+        PENSION -> PENSION: <<createRequest>>
+        PENSION -> SECURITIES ++: PPPU9000 연금저축계좌 정보 등록/수정
+        alt successful case
+            return 계좌번호, 연금개시가능연령, 연금납입한도, 연간소득구분
+            PENSION <-- PENSION: <<createResponse>>
+            return 계좌번호, 연금개시가능연령, 연금납입한도, 연간소득구분
+        else some kind of failure
+        end
+    deactivate PENSION
+    deactivate MOBILE
+    Alice <-- MOBILE: 계좌정보입력 완료
+deactivate MOBILE
+
+== 연금납입한도 설정 확인 ==
+autonumber
+Alice -> MOBILE: 연금납입한도설정확인
+activate MOBILE #FFBBBB
+    MOBILE -> PENSION: POST 연금저축계좌정보 조회
+    activate MOBILE #LightSalmon
+    activate PENSION #LightSalmon
+        PENSION -> PENSION: <<createRequest>>
+        PENSION -> SECURITIES ++: PPPQ9001 연금저축계좌 정보 조회
+        return 연금저축계좌정보
+        PENSION <-- PENSION: <<createResponse>>
+        return 연금저축계좌정보
+    deactivate PENSION
+    deactivate MOBILE
+    |||
+    MOBILE -> PENSION: POST 금융사별 납입현황 조회
+    activate MOBILE #DarkSalmon
+    activate PENSION #DarkSalmon
+        PENSION -> PENSION: <<createRequest>>
+        PENSION -> SECURITIES ++: PPPQ9210 은행연합회 금융사별 가입내역 조회
+        return 은행연합회 금융사별 가입내역
+        PENSION <-- PENSION: <<createResponse>>
+        return  은행연합회 금융사별 가입내역
+    deactivate PENSION
+    deactivate MOBILE
+    Alice <-- MOBILE: 연금납입한도설정확인 완료
+deactivate MOBILE
+
+newpage
+== 연금저축계좌홈 ==
+autonumber
+Alice -> MOBILE: 연금저축계좌홈진입
+activate MOBILE #FFBBBB
+    MOBILE -> PENSION: POST 연금저축계좌정보 조회
+    activate MOBILE #LightSalmon
+    activate PENSION #LightSalmon
+        PENSION -> PENSION: <<createRequest>>
+        PENSION -> SECURITIES ++: PPPQ9001 연금저축계좌 정보 조회
+        return 연금저축계좌정보
+        PENSION <-- PENSION: <<createResponse>>
+        return 연금저축계좌정보
+    deactivate PENSION
+    deactivate MOBILE
+    |||
+    MOBILE -> PENSION: POST 자산평가현황조회
+    activate MOBILE #DarkSalmon
+    activate PENSION #DarkSalmon
+        PENSION -> PENSION: <<createRequest>>
+        PENSION -> SECURITIES ++: PPPQ9300 연금저축계좌 상품평가정보 조회
+        return 자산평가현황
+        PENSION <-- PENSION: <<createResponse>>
+        return  자산평가현황
+    deactivate PENSION
+    deactivate MOBILE
+    Alice <-- MOBILE: 연금저축계좌정보, 자산평가현황
+deactivate MOBILE
+
+==  계좌퀵메뉴 ==
+autonumber
+Alice -> MOBILE: 계좌퀵메뉴 진입
+activate MOBILE #FFBBBB
+    MOBILE -> PENSION: POST 연금저축계좌정보 조회
+    activate MOBILE #LightSalmon
+    activate PENSION #LightSalmon
+        PENSION -> PENSION: <<createRequest>>
+        PENSION -> SECURITIES ++: PPPQ9001 연금저축계좌 정보 조회
+        return 연금저축계좌정보
+        PENSION <-- PENSION: <<createResponse>>
+        return 연금저축계좌정보
+    deactivate PENSION
+    return 연금저축계좌정보조회 완료
+    deactivate MOBILE
+deactivate MOBILE
+
+== 계좌퀵메뉴 - 별명설정 ==
+autonumber
+Alice -> MOBILE: 별명설정 화면 진입
+activate MOBILE #FFBBBB
+    MOBILE -> PENSION: POST 별명조회
+    activate MOBILE #LightSalmon
+    activate PENSION #LightSalmon
+        PENSION -> PENSION: <<createRequest>>
+        PENSION -> SECURITIES ++: PPPQ9100 연금저축계좌 별명 조회
+        return 연금저축계좌 별명
+        PENSION <-- PENSION: <<createResponse>>
+        return  연금저축계좌 별명
+    deactivate PENSION
+    deactivate MOBILE
+    Alice <-- MOBILE: 연금저축계좌 별명
+    |||
+    Alice -> MOBILE: 별명입력
+    MOBILE -> PENSION: POST 별명변경
+    activate MOBILE #DarkSalmon
+    activate PENSION #DarkSalmon
+        PENSION -> PENSION: <<createRequest>>
+        PENSION -> SECURITIES ++: PPPU9101 연금저축계좌 별명 등록/수정
+        return 연금저축계좌 별명
+        PENSION <-- PENSION: <<createResponse>>
+        return  연금저축계좌 별명
+    deactivate PENSION
+    deactivate MOBILE
+    Alice <-- MOBILE: 연금저축계좌 별명
+deactivate MOBILE
+
+== 계좌퀵메뉴 - 연금저축계좌설정 ==
+autonumber
+Alice -> MOBILE: 연금저축계좌설정 진입
+activate MOBILE #FFBBBB
+    MOBILE -> PENSION: POST 연금저축계좌정보 조회
+    activate MOBILE #DarkSalmon
+    activate PENSION #DarkSalmon
+        PENSION -> PENSION: <<createRequest>>
+        PENSION -> SECURITIES ++: PPPQ9001 연금저축계좌 정보 조회
+        return 연금저축계좌정보
+        PENSION <-- PENSION: <<createResponse>>
+        return 연금저축계좌정보
+    deactivate PENSION
+    deactivate MOBILE
+    Alice <-- MOBILE: 연금저축계좌정보조회 완료
+deactivate MOBILE
+
+== 계좌퀵메뉴 - 연금저축계좌설정 - 연금납입한도 ==
+autonumber
+Alice -> MOBILE: 연금저축계좌설정 진입, 연금납입한도 설정
+ref over MOBILE, PENSION, SECURITIES: 연금납입한도설정확인
+ref over MOBILE, PENSION, SECURITIES: 연금저축계좌정보설정
+
+== 계좌퀵메뉴 - 연금저축계좌설정 - 연금수령개시연령 ==
+autonumber
+Alice -> MOBILE: 연금저축계좌설정 진입, 연금수령개시연령 설정
+ref over MOBILE, PENSION, SECURITIES: 연금저축계좌정보설정
+
+== 계좌퀵메뉴 - 연금저축계좌설정 - 세액공제율 ==
+autonumber
+Alice -> MOBILE: 연금저축계좌설정 진입, 세액공제율 설정
+activate MOBILE #FFBBBB
+    MOBILE -> PENSION: POST 소득구간별 세액공제율 조회
+    activate MOBILE #LightSalmon
+    activate PENSION #LightSalmon
+        return 소득구간별 세액공제율
+    deactivate PENSION
+    deactivate MOBILE
+    Alice <-- MOBILE: 소득구간별 세액공제율표 확인 완료
+    |||
+    Alice -> MOBILE: 연간소득구간 입력
+    MOBILE -> PENSION: POST 계좌정보수정
+    activate MOBILE #DarkSalmon
+    activate PENSION #DarkSalmon
+        PENSION -> PENSION: <<createRequest>>
+        PENSION -> SECURITIES ++: PPPU9000 연금저축계좌 정보 등록/수정
+        return 계좌번호, 연금개시가능연령, 연금납입한도, 연간소득구분
+        PENSION <-- PENSION: <<createResponse>>
+        return  계좌번호, 연금개시가능연령, 연금납입한도, 연간소득구분
+    deactivate PENSION
+    deactivate MOBILE
+    Alice <-- MOBILE: 세액공제율 설정 완료
+deactivate MOBILE
+@enduml
+
+
+'
+'자동채우기
+'https://docs.google.com/presentation/d/1kg9RlqDx8ThRBS2_a0VgLzOD2-xp5KMN/edit#slide=id.gbf0ac657ea_0_59
+'자동채우기 설정
+'https://docs.google.com/presentation/d/1kg9RlqDx8ThRBS2_a0VgLzOD2-xp5KMN/edit#slide=id.gd02f9c4334_0_47
+'채우기 예약 플로우
+'https://docs.google.com/presentation/d/1kg9RlqDx8ThRBS2_a0VgLzOD2-xp5KMN/edit#slide=id.gddcb23a6d9_0_8
+'채우기 상세 스펙
+'https://docs.google.com/presentation/d/1kg9RlqDx8ThRBS2_a0VgLzOD2-xp5KMN/edit#slide=id.gb563c46ff4_0_13
+'한번채우기
+'https://docs.google.com/presentation/d/1kg9RlqDx8ThRBS2_a0VgLzOD2-xp5KMN/edit#slide=id.gddcb23a6d9_0_0
+'투자
+'https://docs.google.com/presentation/d/1kg9RlqDx8ThRBS2_a0VgLzOD2-xp5KMN/edit#slide=id.gcd4825fb2f_1_229

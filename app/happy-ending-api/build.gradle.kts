@@ -6,11 +6,12 @@ dependencies {
     implementation(project(":domain:account"))
     implementation(project(":domain:withdrawal"))
     implementation(project(":client:securities-client"))
-    implementation(project(":infra:db"))
+    implementation(project(":infra:mysql"))
     implementation(project(":infra:redis"))
     implementation(project(":infra:kafka"))
     implementation(project(":support:metric"))
     implementation(project(":support:utils"))
+    implementation(project(":support:model"))
     implementation(project(":support:yaml-importer"))
 
     implementation("org.springframework.cloud:spring-cloud-starter-vault-config")

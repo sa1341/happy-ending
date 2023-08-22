@@ -1,0 +1,13 @@
+spring:
+  config:
+    activate:
+      on-profile: test
+    import:
+      - optional:vault://
+      - mysql.yml
+      - klack-client.yml
+  cloud:
+    vault:
+      kv:
+        enabled: false
+      enabled: false

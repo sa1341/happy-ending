@@ -1,0 +1,132 @@
+spring:
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+        globally_quoted_identifiers: true
+    open-in-view: false
+
+datasource:
+  hikari:
+    write:
+      connectionTimeout: 3000
+      validationTimeout: 5000
+      leakDetectionThreshold: 60000
+      data-source-properties:
+        cachePrepStmts: true
+        prepStmtCacheSize: 250
+        prepStmtCacheSqlLimit: 2048
+        useServerPrepStmts: true
+        useLocalSessionState: true
+        rewriteBatchedStatements: true
+        cacheResultSetMetadata: true
+        cacheServerConfiguration: true
+        elideSetAutoCommits: true
+        maintainTimeStats: false
+        socketTimeout: 30000
+    read:
+      connectionTimeout: 3000
+      validationTimeout: 5000
+      leakDetectionThreshold: 60000
+      data-source-properties:
+        cachePrepStmts: true
+        prepStmtCacheSize: 250
+        prepStmtCacheSqlLimit: 2048
+        useServerPrepStmts: true
+        useLocalSessionState: true
+        rewriteBatchedStatements: true
+        cacheResultSetMetadata: true
+        cacheServerConfiguration: true
+        elideSetAutoCommits: true
+        maintainTimeStats: false
+        socketTimeout: 30000
+---
+spring.config.activate.on-profile: test
+spring:
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+        format_sql: true
+        globally_quoted_identifiers: false
+
+datasource:
+  hikari:
+    write:
+      driver-class-name: org.h2.Driver
+      jdbc-url: jdbc:h2:mem:testdb;MODE=MySQL;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+      username: sa
+      password:
+    read:
+      driver-class-name: org.h2.Driver
+      jdbc-url: jdbc:h2:mem:testdb;MODE=MySQL;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+      username: sa
+      password:
+---
+spring.config.activate.on-profile: local
+spring:
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+datasource:
+  hikari:
+    write:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      jdbc-url: jdbc:mysql://localhost:3306/happy-ending?socketTimeout=30000&connectTimeout=5000&useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=Asia/Seoul&useSSL=false&&sslMode=DISABLED&allowPublicKeyRetrieval=true
+      username: happy
+      password: happy
+      minimumIdle: 50
+      maximumPoolSize: 50
+    read:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      jdbc-url: jdbc:mysql://localhost:3306/happy-ending?socketTimeout=30000&connectTimeout=5000&useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=Asia/Seoul&useSSL=false&&sslMode=DISABLED&allowPublicKeyRetrieval=true
+      username: happy
+      password: happy
+      minimumIdle: 50
+      maximumPoolSize: 50
+---
+spring.config.activate.on-profile: dev
+spring:
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/dokotlin?useSSL=false&useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Seoul
+    username: root
+    password:
+    driver-class-name: com.mysql.jdbc.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL57Dialect
+    open-in-view: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+
+logging:
+  level:
+    org.hibernate.SQL: info
+    com.yolo.jean: info
+    org.hibernate.type: info
+test:
+  id: jean
+  password: localtest
+---
+spring.config.activate.on-profile: sandbox
+test:
+  id: jean
+  password: sandbox
+---
+spring.config.activate.on-profile: beta
+test:
+  id: jean
+  password: beta
+---
+spring:
+  config:
+    activate:
+      on-profile: production

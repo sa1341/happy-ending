@@ -1,0 +1,42 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+skinparam ParticipantPadding 20
+skinparam BoxPadding 10
+
+box "연금저축펀드" #Transparent
+actor Alice
+boundary 모바일앱 as MOBILE
+boundary "연금저축펀드 API" as PENSION
+boundary "연금저축펀드 증권 API" as SECURITIES
+end box
+
+== 누적수익 ==
+autonumber
+Alice -> MOBILE: 누적수익 화면 진입
+activate MOBILE #FFBBBB
+    MOBILE -> PENSION: POST 수익률, 자산현황 조회
+    activate MOBILE #LightSalmon
+    activate PENSION #LightSalmon
+        PENSION -> PENSION: <<createRequest>>
+        PENSION -> SECURITIES ++: PPPQ9321 연금저축계좌 누적수익률 조회
+        return 누적수익률, 연평균수익률, 자산현황
+        PENSION <-- PENSION: <<createResponse>>
+        return 누적수익률, 연평균수익률, 자산현황
+    deactivate PENSION
+    deactivate MOBILE
+    Alice <-- MOBILE: 누적수익률, 연평균수익률, 자산현황
+    |||
+    MOBILE -> PENSION: POST 월별 누적수익률 조회
+    activate MOBILE #DarkSalmon
+    activate PENSION #DarkSalmon
+        PENSION -> PENSION: <<createRequest>>
+        PENSION -> SECURITIES ++: PPPQ9320	연금저축계좌 기간별 월말 누적수익률 조회
+        return 기간별 월말 누적수익률
+        PENSION <-- PENSION: <<createResponse>>
+        return 기간별 월말 누적수익률
+    deactivate PENSION
+    deactivate MOBILE
+    Alice <-- MOBILE: 기간별 월말 누적수익률
+deactivate MOBILE
+@enduml

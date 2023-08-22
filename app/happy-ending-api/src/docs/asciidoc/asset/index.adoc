@@ -1,0 +1,80 @@
+ifndef::snippets[]
+:snippets:
+endif::[]
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 3
+:sectlinks:
+:hardbreaks:
+
+= happy-ending API Document
+
+[[introduction]]
+== 소개
+
+카카오페이증권 연금 API 입니다.
+
+WARNING: URL, 포맷, 필드명 등은 협의 후 변경될 수 있습니다.
+
+=== Domain
+
+|===
+| 환경 | domain
+
+| 개발서버(서버)
+| `dev-happy-ending-api.kakaopayinvest.com`
+
+| 샌드박스 서버(서버)
+| `sandbox-happy-ending-api.kakaopayinvest.com`
+
+| 베타서버(서버)
+| `beta-happy-ending-api.kakaopayinvest.com`
+
+| 운영서버(서버)
+| `happy-ending-api.kakaopayinvest.com`
+|===
+
+== 연금계좌 총 누적수익률 조회
+
+=== HTTP Request
+include::{snippets}/get-accumulated-profit/http-request.adoc[]
+
+=== curl
+include::{snippets}/get-accumulated-profit/curl-request.adoc[]
+
+=== HTTP Response
+include::{snippets}/get-accumulated-profit/http-response.adoc[]
+
+=== Response Fields
+include::{snippets}/get-accumulated-profit/response-fields.adoc[]
+
+
+=== 연금계좌 상품별 평가금액 및 수익률 정보 조회
+
+=== HTTP Request
+include::{snippets}/get-products-profit/http-request.adoc[]
+
+=== curl
+include::{snippets}/get-products-profit/curl-request.adoc[]
+
+=== HTTP Response
+include::{snippets}/get-products-profit/http-response.adoc[]
+
+=== Response Fields
+include::{snippets}/get-products-profit/response-fields.adoc[]
+
+
+=== 연금계좌 기간별 월말 누적수익률 조회
+=== HTTP Request
+include::{snippets}/get-accumulated-profits-by-months/http-request.adoc[]
+
+=== curl
+include::{snippets}/get-accumulated-profits-by-months/curl-request.adoc[]
+
+=== HTTP Response
+include::{snippets}/get-accumulated-profits-by-months/http-response.adoc[]
+
+=== Response Fields
+include::{snippets}/get-accumulated-profits-by-months/response-fields.adoc[]

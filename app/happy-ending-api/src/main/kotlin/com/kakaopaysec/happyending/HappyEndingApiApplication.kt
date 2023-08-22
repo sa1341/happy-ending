@@ -1,7 +1,7 @@
 package com.kakaopaysec.happyending
 
-import com.kakaopaysec.happyending.account.entity.Account
-import com.kakaopaysec.happyending.account.repository.AccountRepository
+import com.kakaopaysec.happyending.mysql.account.entity.Account
+import com.kakaopaysec.happyending.mysql.account.repository.AccountRepository
 import org.springframework.boot.ApplicationArguments
 import org.springframework.boot.ApplicationRunner
 import org.springframework.boot.autoconfigure.SpringBootApplication

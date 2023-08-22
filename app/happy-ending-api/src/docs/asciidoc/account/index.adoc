@@ -1,0 +1,110 @@
+ifndef::snippets[]
+:snippets: ../../../build/generated-snippets
+endif::[]
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 3
+:sectlinks:
+:hardbreaks:
+
+= happy-ending API Document
+
+[[introduction]]
+== 소개
+
+카카오페이증권 연금 API 입니다.
+
+WARNING: URL, 포맷, 필드명 등은 협의 후 변경될 수 있습니다.
+
+=== Domain
+
+|===
+| 환경 | domain
+
+| 개발서버(서버)
+| `dev-happy-ending-api.kakaopayinvest.com`
+
+| 샌드박스 서버(서버)
+| `sandbox-happy-ending-api.kakaopayinvest.com`
+
+| 베타서버(서버)
+| `beta-happy-ending-api.kakaopayinvest.com`
+
+| 운영서버(서버)
+| `happy-ending-api.kakaopayinvest.com`
+|===
+
+== 연금계좌 조회
+=== HTTP Request
+include::{snippets}/get-account/http-request.adoc[]
+include::{snippets}/get-account/curl-request.adoc[]
+
+=== HTTP Response
+include::{snippets}/get-account/http-response.adoc[]
+include::{snippets}/get-account/response-fields.adoc[]
+
+== 연금계좌 상세조회
+=== HTTP Request
+include::{snippets}/get-account-detail/http-request.adoc[]
+include::{snippets}/get-account-detail/curl-request.adoc[]
+
+=== HTTP Response
+include::{snippets}/get-account-detail/http-response.adoc[]
+include::{snippets}/get-account-detail/response-fields.adoc[]
+
+== 연금계좌 이메일정보 조회
+=== HTTP Request
+include::{snippets}/get-email-info/http-request.adoc[]
+include::{snippets}/get-email-info/curl-request.adoc[]
+
+=== HTTP Response
+include::{snippets}/get-email-info/http-response.adoc[]
+include::{snippets}/get-email-info/response-fields.adoc[]
+
+== 연금계좌 개시가능일자 및 개시가능연령 조회
+=== HTTP Request
+include::{snippets}/get-possible-receiving-date-and-age/http-request.adoc[]
+include::{snippets}/get-possible-receiving-date-and-age/curl-request.adoc[]
+
+=== HTTP Response
+include::{snippets}/get-possible-receiving-date-and-age/http-response.adoc[]
+include::{snippets}/get-possible-receiving-date-and-age/response-fields.adoc[]
+
+== 연금계좌 정보등록
+=== HTTP Request
+include::{snippets}/save-pension-account-info/http-request.adoc[]
+include::{snippets}/save-pension-account-info/curl-request.adoc[]
+
+=== HTTP Response
+include::{snippets}/save-pension-account-info/http-response.adoc[]
+include::{snippets}/save-pension-account-info/response-fields.adoc[]
+
+
+== 연금계좌 정보수정
+=== HTTP Request
+include::{snippets}/update-pension-account-info/http-request.adoc[]
+include::{snippets}/update-pension-account-info/curl-request.adoc[]
+
+=== HTTP Response
+include::{snippets}/update-pension-account-info/http-response.adoc[]
+include::{snippets}/update-pension-account-info/response-fields.adoc[]
+
+== 계좌 확인서 발급을 위한 hmac 생성
+=== HTTP Request
+include::{snippets}/create-digest/http-request.adoc[]
+include::{snippets}/create-digest/curl-request.adoc[]
+
+=== HTTP Response
+include::{snippets}/create-digest/http-response.adoc[]
+include::{snippets}/create-digest/response-fields.adoc[]
+
+== 계좌 확인서 발급 요청
+=== HTTP Request
+include::{snippets}/issue-account-confirmation/http-request.adoc[]
+include::{snippets}/issue-account-confirmation/curl-request.adoc[]
+
+=== HTTP Response
+include::{snippets}/issue-account-confirmation/http-response.adoc[]
+include::{snippets}/issue-account-confirmation/response-fields.adoc[]

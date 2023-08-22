@@ -1,0 +1,43 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+skinparam ParticipantPadding 20
+skinparam BoxPadding 10
+
+box "연금저축펀드" #Transparent
+actor Alice
+boundary 모바일앱 as MOBILE
+boundary "연금저축펀드 API" as PENSION
+boundary "연금저축펀드 증권 API" as SECURITIES
+end box
+
+== 연금저축계좌홈 - 투자하기 ==
+group 한번투자
+    Alice -> MOBILE: 한번투자 시작
+    create boundary "펀드 API" as FUND
+    MOBILE -> FUND: 한번투자 실행
+    ref over FUND: 펀드서비스 한번투자
+    FUND -> FUND: <<createRequest>>
+    FUND -> SECURITIES ++: 한번투자 실행
+    return 한번투자 신청완료
+    MOBILE <-- FUND: 한번투자 신청완료
+    Alice <-- MOBILE: 한번투자 신청완료
+end
+group 자동투자
+    Alice -> MOBILE: 자동투자 설정(투자금액, 주기) 입력 & 투자하기 클릭
+    activate MOBILE #FFBBBB
+        MOBILE -> PENSION: POST 자동투자 설정
+        activate MOBILE #DarkSalmon
+        activate PENSION #DarkSalmon
+            PENSION -> PENSION: <<createRequest>>
+            PENSION -> SECURITIES ++: (NEW) 자동투자 설정
+            return 자동투자 신청완료
+            PENSION <-- PENSION: <<createResponse>>
+            return 자동투자 신청완료
+        deactivate PENSION
+        return 자동투자 신청완료
+        deactivate MOBILE
+    deactivate MOBILE
+end
+
+@enduml

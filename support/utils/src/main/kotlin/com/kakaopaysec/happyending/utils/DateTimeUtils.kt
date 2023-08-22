@@ -1,5 +1,6 @@
 package com.kakaopaysec.happyending.utils
 
+import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.time.format.DateTimeFormatterBuilder
 import java.time.format.SignStyle
@@ -28,4 +29,8 @@ object DateTimeUtils {
         .toFormatter()
 
     val yyyyMMddTHHmmssSSSBar: DateTimeFormatter = DateTimeFormatter.ofPattern("YYYY-MM-dd'T'HH:mm:ss.SSS")
+
+    fun LocalDateTime.yyyyMMddHHmmssSSS(): String {
+        return format(DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS"))
+    }
 }

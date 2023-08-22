@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: happy-ending-batch
+  batch:
+    jdbc:
+      initialize-schema: never
+      isolation-level-for-create: default
+    job:
+      name: ${job.name:NONE}
+      enabled: true
+  config:
+    import:
+      - metric.yml
+
+management:
+  prometheus:
+    metrics:
+      export:
+        pushgateway:
+          base-url: http://localhost:8882
+          enabled: false
+          shutdown-operation: push

@@ -1,0 +1,66 @@
+ifndef::snippets[]
+:snippets:
+endif::[]
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 3
+:sectlinks:
+:hardbreaks:
+
+= happy-ending API Document
+
+[[introduction]]
+== 소개
+
+카카오페이증권 연금 API 입니다.
+
+WARNING: URL, 포맷, 필드명 등은 협의 후 변경될 수 있습니다.
+
+=== Domain
+
+|===
+| 환경 | domain
+
+| 개발서버(서버)
+| `dev-happy-ending-api.kakaopayinvest.com`
+
+| 샌드박스 서버(서버)
+| `sandbox-happy-ending-api.kakaopayinvest.com`
+
+| 베타서버(서버)
+| `beta-happy-ending-api.kakaopayinvest.com`
+
+| 운영서버(서버)
+| `happy-ending-api.kakaopayinvest.com`
+|===
+
+== 은행연합회 한도금액 조회
+
+=== HTTP Request
+include::{snippets}/get-limit-balance-amount/http-request.adoc[]
+
+=== curl
+include::{snippets}/get-limit-balance-amount/curl-request.adoc[]
+
+=== HTTP Response
+include::{snippets}/get-limit-balance-amount/http-response.adoc[]
+
+=== Response Fields
+include::{snippets}/get-limit-balance-amount/response-fields.adoc[]
+
+
+== 은행연합회 등록 세부내역 조회
+
+=== HTTP Request
+include::{snippets}/get-registered-accounts/http-request.adoc[]
+
+=== curl
+include::{snippets}/get-registered-accounts/curl-request.adoc[]
+
+=== HTTP Response
+include::{snippets}/get-registered-accounts/http-response.adoc[]
+
+=== Response Fields
+include::{snippets}/get-registered-accounts/response-fields.adoc[]

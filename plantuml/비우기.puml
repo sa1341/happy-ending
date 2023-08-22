@@ -1,0 +1,115 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+skinparam ParticipantPadding 20
+skinparam BoxPadding 10
+
+box "연금저축펀드" #Transparent
+actor Alice
+boundary 모바일앱 as MOBILE
+boundary "연금저축펀드 API" as PENSION
+boundary "연금저축펀드 증권 API" as SECURITIES
+end box
+
+== 계좌퀵메뉴 - 비우기 ==
+autonumber
+Alice -> MOBILE: 비우기 화면 진입
+activate MOBILE #FFBBBB
+    MOBILE -> PENSION: POST 비우기 과세제외, 대상금액 조회
+    group 비우기 조건 확인
+        activate MOBILE #DarkSalmon
+        activate PENSION #DarkSalmon
+            PENSION -> PENSION: <<createRequest>>
+            create boundary "증권플랫폼 API" as BUFFET
+            PENSION -> BUFFET ++: POST 출금가능 상태조회
+            return 출금가능 상태결과
+        alt 출금가능계좌X
+            PENSION <-- PENSION: <<createResponse>>
+            MOBILE <-- PENSION: 출금가능 상태결과
+            Alice <-- MOBILE: 비우기 불가
+        else 출금가능계좌O
+            PENSION -> PENSION: <<createRequest>>
+            PENSION -> SECURITIES ++: PPPQ9340	연금저축계좌 금액명세 항목 조회
+            return 연금저축계좌 금액명세
+            PENSION <-- PENSION: <<createResponse>>
+            return 연금저축계좌 금액명세
+            Alice <-- MOBILE: 연금저축계좌 금액명세
+        end
+        deactivate PENSION
+        deactivate MOBILE
+    end
+deactivate MOBILE
+|||
+group 비우기 세금정보 확인
+Alice -> MOBILE: 비울 금액 입력 & 다음 버튼 클릭
+    activate MOBILE #FFBBBB
+    MOBILE -> PENSION: POST 비우기 금액 세금정보 조회
+        activate MOBILE #LightSalmon
+        activate PENSION #LightSalmon
+            PENSION -> PENSION: <<createRequest>>
+            PENSION -> SECURITIES ++: PPPQ9350	연금저축계좌 출금금액 세금정보 조회
+            return 비우기 금액 세금정보
+            PENSION <-- PENSION: <<createResponse>>
+            return 비우기 금액 세금정보
+        deactivate PENSION
+        deactivate MOBILE
+    Alice <-- MOBILE: 비우기 금액 세금정보
+    deactivate MOBILE
+end
+group 비우기 실행
+    Alice -> MOBILE: 비우기 실행 버튼 클릭
+    activate MOBILE #FFBBBB
+        MOBILE -> PENSION: POST 연금계좌정보조회
+        activate MOBILE #DarkSalmon
+        activate PENSION #DarkSalmon
+        PENSION -> PENSION: <<createRequest>>
+        PENSION -> SECURITIES ++: PPPQ9001 연금저축계좌 정보 조회
+        return 비우기 금액을 이체할 계좌번호
+            return 비우기 금액을 이체할 계좌번호
+        deactivate PENSION
+        deactivate MOBILE
+        |||
+        MOBILE -> PENSION: POST 비우기 요청 메시지 암호화 텍스트 생성
+        activate MOBILE #DarkSalmon
+        activate PENSION #DarkSalmon
+            PENSION -> PENSION: 암호화 텍스트 생성
+            create database "레디스" as REDIS
+            PENSION -> REDIS ++: 요청 데이터 및 생성한 암호화 텍스트 저장
+            return 저장완료
+            return 비우기 실행 암호화 텍스트
+        deactivate PENSION
+        deactivate MOBILE
+        |||
+        MOBILE -> PENSION: POST 비우기 실행
+        activate MOBILE #Salmon
+        activate PENSION #Salmon
+            PENSION -> REDIS ++: 암호화 텍스트로 서명한 데이터 조회
+            return 서명에 사용한 데이터
+            alt Digest 조회실패
+                MOBILE <-- PENSION: "요청한 리소스를 찾을 수 없습니다."
+            else Digest 조회성공
+                create boundary "인증서 API" as CERTIFICATE
+                PENSION -> CERTIFICATE ++: GET 인증서 조회
+                return 인증서정보
+                alt 인증서 조회실패
+                    MOBILE <-- PENSION: "인증서가 존재하지 않습니다."
+                else 인증서 조회성공
+                    PENSION -> PENSION: 인증서, 서명값 유효성 검증
+                    alt 서명 검증실패
+                        MOBILE <-- PENSION: "서명값 검증에 실패했습니다."
+                    else 서명 검증성공
+                        PENSION -> PENSION: <<createRequest>>
+                        PENSION -> BUFFET ++: POST 비우기
+                        return 비우기 완료 결과
+                        PENSION <-- PENSION: <<createResponse>>
+                        return 비우기 완료 결과
+                        Alice <-- MOBILE: 비우기 완료 결과
+                    end
+                end
+            end
+        deactivate PENSION
+        deactivate MOBILE
+    deactivate MOBILE
+end
+
+@enduml

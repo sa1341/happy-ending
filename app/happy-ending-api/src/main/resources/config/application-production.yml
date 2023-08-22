@@ -3,5 +3,5 @@ spring:
     activate:
       on-profile: production
     import:
-      - db.yml
+      - mysql.yml
       - client.yml

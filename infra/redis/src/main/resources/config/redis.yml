@@ -1,0 +1,56 @@
+spring:
+  data:
+    redis:
+      client-type: lettuce
+      lettuce:
+        pool:
+          enabled: true
+      connect-timeout: 5s
+      timeout: 3s
+---
+spring.config.activate.on-profile: test
+spring:
+  data:
+    redis:
+      password:
+---
+spring.config.activate.on-profile: local
+spring:
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      password:
+---
+spring.config.activate.on-profile: dev
+spring:
+  data:
+    redis:
+      host: sandbox-retail-happy-redis.kakaopayinvest.com
+      port: 32516
+      password:
+---
+spring.config.activate.on-profile: sandbox
+spring:
+  data:
+    redis:
+      host: sandbox-retail-happy-redis.kakaopayinvest.com
+      port: 32516
+      password:
+---
+spring.config.activate.on-profile: beta
+spring:
+  data:
+    redis:
+      host:
+      port:
+      password:
+---
+spring.config.activate.on-profile: production
+spring:
+  data:
+    redis:
+      host:
+      port:
+      password:
+

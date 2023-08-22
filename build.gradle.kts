@@ -17,13 +17,14 @@ allprojects {
     }
 
     group = "com.kakaopaysec.happy-ending"
-    version = "0.0.1-SNAPSHOT"
+    version = "1.0.0"
 }
 
 subprojects {
     apply {
         plugin("org.springframework.boot")
         plugin("io.spring.dependency-management")
+        plugin("idea")
         plugin("java")
         plugin("kotlin")
         plugin("kotlin-kapt")
@@ -34,7 +35,7 @@ subprojects {
     }
 
     group = "com.kakaopaysec.happy-ending"
-    version = "0.0.1-SNAPSHOT"
+    version = "1.0.0"
     java.sourceCompatibility = Versions.java
     extra["springCloudVersion"] = "2022.0.3"
 
@@ -50,6 +51,9 @@ subprojects {
         }
     }
 
+    val isMacOS: Boolean = System.getProperty("os.name").startsWith("Mac OS X")
+    val architecture = System.getProperty("os.arch").toLowerCase()
+
     dependencies {
         implementation("org.springframework.boot:spring-boot-starter-actuator")
         implementation("org.springframework.boot:spring-boot-starter")
@@ -61,6 +65,10 @@ subprojects {
         implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
         implementation("org.jetbrains.kotlin:kotlin-reflect")
         implementation("io.github.microutils:kotlin-logging:${Versions.KOTLIN_LOGGING}")
+        if (isMacOS && architecture == "aarch64") {
+            implementation("io.netty:netty-resolver-dns-native-macos:4.1.79.Final:osx-aarch_64")
+        }
+
         annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
         testImplementation("org.springframework.boot:spring-boot-starter-test") {
             exclude(module = "mockito-core")
@@ -73,6 +81,38 @@ subprojects {
     tasks {
         test {
             useJUnitPlatform()
+            finalizedBy(koverVerify)
+        }
+
+        koverHtmlReport {
+            kover {
+                htmlReport {
+                    reportDir.set(file("$buildDir/report/kover/kover.html"))
+                }
+            }
+            finalizedBy(koverVerify)
+        }
+
+        koverVerify {
+            kover {
+                verify {
+                    rule {
+                        bound {
+                            minValue = BigInteger.valueOf(
+                                when (project.name) {
+                                    "happy-ending-api" -> 60
+                                    else -> 0
+                                }
+                            ).toInt()
+                            maxValue = 100
+                            // coverage type
+                            counter = kotlinx.kover.api.CounterType.LINE
+                            // value type
+                            valueType = kotlinx.kover.api.VerificationValueType.COVERED_PERCENTAGE
+                        }
+                    }
+                }
+            }
         }
 
         compileKotlin {
