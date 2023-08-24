@@ -1,7 +1,6 @@
-package com.kakaopaysec.happyending.logging.log.logger
+package com.kakaopaysec.happyending.logging.logger
 
-import com.kakaopaysec.happyending.logging.log.servlet.OutputStreamCopiedHttpResponseWrapper
-import com.kakaopaysec.happyending.logging.logger.LoggingHelper
+import com.kakaopaysec.happyending.logging.servlet.OutputStreamCopiedHttpResponseWrapper
 import jakarta.servlet.http.HttpServletRequestWrapper
 import mu.KotlinLogging
 import org.springframework.stereotype.Component
