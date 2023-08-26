@@ -3,9 +3,9 @@ package com.kakaopaysec.happyending
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
-@SpringBootApplication(scanBasePackages = ["com.kakaopaysec.happyending"])
-class HappyEndingApiApplication
+@SpringBootApplication
+class HappyEndingConsumerApplication
 
 fun main(args: Array<String>) {
-    runApplication<HappyEndingApiApplication>(*args)
+    runApplication<HappyEndingConsumerApplication>(*args)
 }

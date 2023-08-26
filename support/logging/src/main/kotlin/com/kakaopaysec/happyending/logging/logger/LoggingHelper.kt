@@ -2,7 +2,6 @@ package com.kakaopaysec.happyending.logging.logger
 
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.node.ObjectNode
-import com.kakaopaysec.happyending.logging.log.logger.JsonHelper
 import com.kakaopaysec.happyending.logging.logback.MaskingPatterns
 import com.kakaopaysec.happyending.logging.servlet.OutputStreamCopiedHttpResponseWrapper
 import jakarta.servlet.http.HttpServletRequest

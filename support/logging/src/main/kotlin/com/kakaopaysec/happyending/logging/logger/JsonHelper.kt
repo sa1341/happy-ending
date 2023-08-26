@@ -1,9 +1,10 @@
-package com.kakaopaysec.happyending.logging.log.logger
+package com.kakaopaysec.happyending.logging.logger
 
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.PropertyNamingStrategies
+import com.kakaopaysec.happyending.logging.logger.ApiJsonLogger.LogFormat
 
 object JsonHelper {
 
@@ -20,4 +21,7 @@ object JsonHelper {
     fun getStringFromObject(obj: Any?): String? {
         return MAPPER.writeValueAsString(obj)
     }
+
+    fun convertToJson(format: LogFormat): String =
+        MAPPER.writeValueAsString(format)
 }

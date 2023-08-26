@@ -2,7 +2,8 @@ rootProject.name = "happy-ending"
 
 include(
     ":app:happy-ending-api",
-    ":app:happy-ending-batch"
+    ":app:happy-ending-batch",
+    ":app:happy-ending-consumer"
 )
 
 include(":client:securities-client")

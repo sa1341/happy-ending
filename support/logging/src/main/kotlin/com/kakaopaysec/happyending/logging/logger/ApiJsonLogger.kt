@@ -1,6 +1,5 @@
 package com.kakaopaysec.happyending.logging.logger
 
-import com.fasterxml.jackson.databind.ObjectMapper
 import com.kakaopaysec.happyending.logging.servlet.OutputStreamCopiedHttpResponseWrapper
 import com.kakaopaysec.happyending.utils.DateTimeUtils.yyyyMMddTHHmmssSSSBar
 import com.kakaopaysec.happyending.utils.ProfileUtils
@@ -18,13 +17,12 @@ private val logger = KotlinLogging.logger("app-json-logger")
 
 @Component
 class ApiJsonLogger(
-    private val objectMapper: ObjectMapper,
     private val profileUtils: ProfileUtils,
     @Value("\${spring.application.name}")
     private val appName: String
 ) {
 
-    internal class LogFormat(
+     class LogFormat(
         val requestTime: String,
         val hostname: String,
         val port: Int,
@@ -38,12 +36,12 @@ class ApiJsonLogger(
         val logType: JsonLogType = JsonLogType.INGRESS
     )
 
-    internal class Request<T>(
+     class Request<T>(
         val headers: Map<String, String>,
         val body: T?
     )
 
-    internal class Response<T>(
+     class Response<T>(
         val status: Int,
         val headers: Map<String, String>,
         val body: T?
@@ -78,7 +76,7 @@ class ApiJsonLogger(
             ),
             logType = JsonLogType.EGRESS
         )
-        logger.info { objectMapper.writeValueAsString(logFormat) }
+        logger.error { JsonHelper.convertToJson(logFormat) }
     }
 
     fun error(
@@ -107,7 +105,7 @@ class ApiJsonLogger(
             ),
             logType = JsonLogType.EGRESS
         )
-        logger.error { objectMapper.writeValueAsString(logFormat) }
+        logger.error { JsonHelper.convertToJson(logFormat) }
     }
 
     fun info(
@@ -139,7 +137,7 @@ class ApiJsonLogger(
                 body = LoggingHelper.getBodyFrom(response)
             )
         )
-        logger.info { objectMapper.writeValueAsString(logFormat) }
+        logger.error { JsonHelper.convertToJson(logFormat) }
     }
 }
 

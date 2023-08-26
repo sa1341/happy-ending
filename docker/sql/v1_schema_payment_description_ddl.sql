@@ -217,4 +217,4 @@ CREATE TABLE payment_description_final_records
     , UNIQUE KEY `payment_description_final_records_ux_1` (`icm_impd_yr`, `record_type`, `acno`, `tr_dt`, `tr_s`)
     , KEY `payment_description_final_records_idx_1` (`tr_dt`, `tr_s`, `acno`)
 ) ENGINE = InnoDB
-COMMENT ='연금 지급명세서 최종 레코드';                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     ', 'BATCH', 'BATCH');
+COMMENT ='연금 지급명세서 최종 레코드';

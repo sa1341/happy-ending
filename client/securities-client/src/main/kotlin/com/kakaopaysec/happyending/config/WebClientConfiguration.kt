@@ -41,10 +41,10 @@ class WebClientConfiguration(
     @Bean
     fun happyEndingClient(
         @Qualifier("happyEndingObjectMapper")
-        objectMapper: ObjectMapper
+        happyEndingObjectMapper: ObjectMapper
     ): WebClient {
         return builder()
-            .exchangeStrategies(exchangeStrategies(objectMapper))
+            .exchangeStrategies(exchangeStrategies(happyEndingObjectMapper))
             .baseUrl(baseUrl)
             .filter { request, next ->
                 val clientRequest = ClientRequest.from(request)

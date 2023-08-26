@@ -23,7 +23,7 @@ import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 
 @Configuration
-class JacksonConfiguration {
+class SecuritiesJacksonConfiguration {
 
     @Bean
     fun happyEndingObjectMapper(): ObjectMapper {
