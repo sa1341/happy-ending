@@ -24,3 +24,22 @@ services:
       - ./sql/:/docker-entrypoint-initdb.d/
       - ./happy_ending_db:/var/lib/mysql
       - ./custom.cnf:/etc/mysql/conf.d/custom.cnf
+  happy-ending-zookeeper:
+    image: wurstmeister/zookeeper
+    restart: always
+    ports:
+      - "2181:2181"
+  happy-ending-kafka:
+    image: wurstmeister/kafka
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ADVERTISED_HOST_NAME: 127.0.0.1
+      KAFKA_ZOOKEEPER_CONNECT: happy-ending-zookeeper:2181
+      KAFKA_ADVERTISED_PORT: 9092
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    links:
+      - happy-ending-zookeeper
+
