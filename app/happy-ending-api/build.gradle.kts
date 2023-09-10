@@ -10,6 +10,7 @@ dependencies {
     implementation(project(":infra:redis"))
     implementation(project(":infra:kafka"))
     implementation(project(":support:metric"))
+    implementation(project(":support:logging"))
     implementation(project(":support:utils"))
     implementation(project(":support:model"))
     implementation(project(":support:yaml-importer"))

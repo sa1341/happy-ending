@@ -15,10 +15,10 @@ object GuidUtils {
     fun generateSecuritiesGuid(): String {
         val uuid = UUID.randomUUID().toStringRemoveDashes()
         return "$SECURITIES_CHANNEL_VALUE${LocalDateTime.now().yyyyMMddHHmmssSSS()}${
-            uuid.substring(
-                uuid.length - 12,
-                uuid.length
-            )
+        uuid.substring(
+            uuid.length - 12,
+            uuid.length
+        )
         }"
     }
 }

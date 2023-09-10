@@ -22,7 +22,7 @@ class ApiJsonLogger(
     private val appName: String
 ) {
 
-     class LogFormat(
+    class LogFormat(
         val requestTime: String,
         val hostname: String,
         val port: Int,
@@ -36,12 +36,12 @@ class ApiJsonLogger(
         val logType: JsonLogType = JsonLogType.INGRESS
     )
 
-     class Request<T>(
+    class Request<T>(
         val headers: Map<String, String>,
         val body: T?
     )
 
-     class Response<T>(
+    class Response<T>(
         val status: Int,
         val headers: Map<String, String>,
         val body: T?

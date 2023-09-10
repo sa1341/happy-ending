@@ -59,6 +59,7 @@ subprojects {
         implementation("org.springframework.boot:spring-boot-starter")
         implementation("org.springframework.boot:spring-boot-starter-web")
         implementation("org.springframework.boot:spring-boot-starter-webflux")
+        implementation("org.springframework.cloud:spring-cloud-stream")
         implementation("io.github.resilience4j:resilience4j-spring-boot3")
         implementation("io.github.resilience4j:resilience4j-reactor")
         implementation("org.jetbrains.kotlinx:kotlinx-coroutines-slf4j")

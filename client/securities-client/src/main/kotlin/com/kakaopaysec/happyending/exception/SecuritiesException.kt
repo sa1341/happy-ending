@@ -67,5 +67,5 @@ enum class SecuritiesErrorCode(
     LEDGER_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "연결 상태가 좋지 않습니다. 조금 뒤 다시 시도해주세요. (PL500)"),
     LEDGER_BAD_PARAMETER(HttpStatus.INTERNAL_SERVER_ERROR, "연결 상태가 좋지 않습니다. 조금 뒤 다시 시도해주세요. (PL400)"),
     LEDGER_PARSING_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "연결 상태가 좋지 않습니다. 조금 뒤 다시 시도해주세요. (PL400)"),
-    LEDGER_RESPONSE_DATA_NULL(HttpStatus.INTERNAL_SERVER_ERROR, "연결 상태가 좋지 않습니다. 조금 뒤 다시 시도해주세요. (PL400)"),
+    LEDGER_RESPONSE_DATA_NULL(HttpStatus.INTERNAL_SERVER_ERROR, "연결 상태가 좋지 않습니다. 조금 뒤 다시 시도해주세요. (PL400)")
 }

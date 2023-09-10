@@ -1,7 +1,5 @@
 package com.kakaopaysec.happyending.book.model
 
-import java.time.LocalDateTime
-
 data class Book(
     val bookId: Long,
     val titleKorean: String,

@@ -2,6 +2,17 @@ spring:
   config:
     activate:
       on-profile: local
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: localhost:9092
+      binders:
+        retail-kafka:
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: happyGroup
 
 logging:
   level:

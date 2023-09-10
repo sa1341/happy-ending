@@ -99,7 +99,9 @@ class WebClientConfiguration(
                                             .nonProxyHostsPredicate(Predicate.isEqual("localhost"))
                                     }.getOrDefault(it)
                                 }
-                            } else it
+                            } else {
+                                it
+                            }
                         }
                         .keepAlive(true)
                 }
