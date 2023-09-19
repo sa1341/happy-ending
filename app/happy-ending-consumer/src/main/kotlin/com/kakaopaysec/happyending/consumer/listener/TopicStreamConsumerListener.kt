@@ -10,6 +10,8 @@ import org.apache.kafka.streams.kstream.Produced
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.kafka.annotation.EnableKafkaStreams
+import org.springframework.kafka.support.serializer.JsonDeserializer
+import org.springframework.kafka.support.serializer.JsonSerializer
 import java.util.function.Consumer
 
 private val log = KotlinLogging.logger {}
@@ -26,18 +28,28 @@ class TopicStreamConsumerListener(
     }
 
     @Bean
-    fun kStream(streamsBuilder: StreamsBuilder): KStream<String, String> {
-        val stream = streamsBuilder.stream<String, String>(
+    fun kStream(streamsBuilder: StreamsBuilder): KStream<String, Person> {
+        val jsonSerdes = createJsonSerdes()
+        val stream = streamsBuilder.stream(
             "stream-topic",
-            Consumed.with(Serdes.String(), Serdes.String())
+            Consumed.with(Serdes.String(), Serdes.serdeFrom(jsonSerdes.first, jsonSerdes.second))
         )
 
-        stream.mapValues(String::uppercase)
+        stream.mapValues(Person::name)
             .to(
                 "out-topic",
                 Produced.with(Serdes.String(), Serdes.String())
             )
 
         return stream
+    }
+
+    private fun createJsonSerdes(): Pair<JsonSerializer<Person>, JsonDeserializer<Person>> {
+        val jsonSerializer = JsonSerializer<Person>()
+        val jsonDeSerializer = JsonDeserializer(Person::class.java)
+        jsonDeSerializer.setRemoveTypeHeaders(false)
+        jsonDeSerializer.addTrustedPackages("*")
+        jsonDeSerializer.setUseTypeMapperForKey(true)
+        return Pair(jsonSerializer, jsonDeSerializer)
     }
 }
