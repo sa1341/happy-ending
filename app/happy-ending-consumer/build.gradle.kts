@@ -6,4 +6,5 @@ dependencies {
     implementation(project(":support:yaml-importer"))
 
     implementation("org.springframework.cloud:spring-cloud-starter-stream-kafka")
+    implementation("org.apache.kafka:kafka-streams:3.3.1")
 }

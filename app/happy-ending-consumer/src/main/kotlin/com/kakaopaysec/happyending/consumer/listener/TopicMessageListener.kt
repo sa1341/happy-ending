@@ -12,7 +12,7 @@ private val log = KotlinLogging.logger {}
 class TopicMessageListener {
 
     @KafkaListener(
-        topics = ["topic"],
+        topics = ["basic-topic"],
         groupId = "\${spring.kafka.consumer.group-id}",
         containerFactory = "kafkaListenerContainerFactory"
     )

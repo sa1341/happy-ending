@@ -1,6 +1,11 @@
 spring:
   application:
     name: happy-ending-consumer
+  kafka:
+    streams:
+      application-id: happy-ending-consumer_id
+      bootstrap-servers: localhost:9092
+
   cloud:
     stream:
       function:
