@@ -14,6 +14,10 @@ spring:
         backend: secret
         default-context: application
 
+happy-ending:
+  file:
+    path: /Users/limjun-young/workspace/privacy/dev/test
+
 logging:
   level:
     org.springframework.web: DEBUG
