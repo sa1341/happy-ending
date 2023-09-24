@@ -1,2 +1,5 @@
 ### 파일 다운로드
 GET localhost:8080/api/v1/files?fileName=plaintext.txt
+
+### 파일 다운로드(binaryy)
+GET localhost:8080/api/v1/files/binary?fileName=plaintext.txt
