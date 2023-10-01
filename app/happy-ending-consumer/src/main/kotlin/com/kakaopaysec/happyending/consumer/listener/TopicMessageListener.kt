@@ -18,7 +18,6 @@ class TopicMessageListener {
     )
     fun handle(record: ConsumerRecord<String, String>, ack: Acknowledgment) {
         log.info { "data = ${record.value()}" }
-
         ack.acknowledge()
     }
 }
