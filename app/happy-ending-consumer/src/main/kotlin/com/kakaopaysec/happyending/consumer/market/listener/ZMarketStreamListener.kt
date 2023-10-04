@@ -3,12 +3,18 @@ package com.kakaopaysec.happyending.consumer.market.listener
 import com.kakaopaysec.happyending.consumer.market.model.Purchase
 import com.kakaopaysec.happyending.consumer.market.model.PurchasePattern
 import com.kakaopaysec.happyending.consumer.market.model.RewardAccumulator
+import com.kakaopaysec.happyending.consumer.market.partitioner.RewardStreamPartitioner
+import com.kakaopaysec.happyending.consumer.market.transformer.PurchaseRewardTransformer
 import org.apache.kafka.common.serialization.Serdes
 import org.apache.kafka.streams.StreamsBuilder
 import org.apache.kafka.streams.kstream.Branched
 import org.apache.kafka.streams.kstream.Consumed
 import org.apache.kafka.streams.kstream.KStream
+import org.apache.kafka.streams.kstream.Printed.toSysOut
 import org.apache.kafka.streams.kstream.Produced
+import org.apache.kafka.streams.kstream.Repartitioned
+import org.apache.kafka.streams.kstream.ValueTransformerSupplier
+import org.apache.kafka.streams.state.Stores
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.kafka.annotation.EnableKafkaStreams
@@ -50,6 +56,35 @@ class ZMarketStreamListener {
         purchaseKStream.to(
             "purchases",
             Produced.with(Serdes.String(), Serdes.serdeFrom(purchaseJsonSerdes.first, purchaseJsonSerdes.second))
+        )
+
+        val streamBuilder = StreamsBuilder()
+        val rewardsStateStoreName = "rewardsPointsStore"
+        val streamPartitioner = RewardStreamPartitioner()
+
+        val storeSupplier = Stores.inMemoryKeyValueStore(rewardsStateStoreName)
+        val storeBuilder = Stores.keyValueStoreBuilder(storeSupplier, Serdes.String(), Serdes.Integer())
+        streamBuilder.addStateStore(storeBuilder)
+
+        val transByCustomerStream = purchaseKStream.repartition(
+            Repartitioned
+                .streamPartitioner(streamPartitioner)
+                .withKeySerde(Serdes.String())
+                .withValueSerde(Serdes.serdeFrom(purchaseJsonSerdes.first, purchaseJsonSerdes.second))
+                .withName("customer_transactions")
+        )
+
+        val statefulRewardAccumulator = transByCustomerStream.transformValues(
+            ValueTransformerSupplier { PurchaseRewardTransformer(rewardsStateStoreName) },
+            rewardsStateStoreName
+        )
+
+        statefulRewardAccumulator.print(
+            toSysOut<String?, RewardAccumulator?>().withLabel("rewards")
+        )
+        statefulRewardAccumulator.to(
+            "rewards",
+            Produced.with(Serdes.String(), Serdes.serdeFrom(rewardAccumulatorSerdes.first, rewardAccumulatorSerdes.second))
         )
 
         // KStream에서 제공하느 branch를 사용하여 스트림별로 관심사 토픽으로 분기처리 적용

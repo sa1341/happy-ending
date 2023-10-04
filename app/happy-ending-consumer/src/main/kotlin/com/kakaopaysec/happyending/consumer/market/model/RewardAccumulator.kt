@@ -3,10 +3,15 @@ package com.kakaopaysec.happyending.consumer.market.model
 data class RewardAccumulator(
     val customerId: String,
     val purchaseTotal: Double,
-    val totalRewardPoints: Int,
+    var totalRewardPoints: Int,
     val currentRewardPoints: Int,
     val daysFromLastPurchase: Int = 0
 ) {
+
+    fun addRewardPoints(previousTotalPoints: Int) {
+        this.totalRewardPoints += previousTotalPoints
+    }
+
     companion object {
         fun from(purchase: Purchase): RewardAccumulator {
             val rewardPoints = purchase.price.times(purchase.quantity).toInt()
