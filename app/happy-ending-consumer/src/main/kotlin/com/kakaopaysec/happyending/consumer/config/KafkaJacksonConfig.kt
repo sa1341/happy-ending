@@ -26,6 +26,7 @@ import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import org.springframework.kafka.support.serializer.JsonSerializer as KafkaJsonSerializer
+import com.kakaopaysec.happyending.consumer.stock.model.StockTickerData
 
 @Configuration
 class KafkaJacksonConfig {
@@ -95,6 +96,15 @@ class KafkaJacksonConfig {
         fun createRewardAccumulatorJsonSerdes(): Pair<KafkaJsonSerializer<RewardAccumulator>, JsonDeserializer<RewardAccumulator>> {
             val jsonSerializer = KafkaJsonSerializer<RewardAccumulator>()
             val jsonDeSerializer = JsonDeserializer(RewardAccumulator::class.java)
+            jsonDeSerializer.setRemoveTypeHeaders(false)
+            jsonDeSerializer.addTrustedPackages("*")
+            jsonDeSerializer.setUseTypeMapperForKey(true)
+            return Pair(jsonSerializer, jsonDeSerializer)
+        }
+
+        fun createStockTickerJsonSerdes(): Pair<KafkaJsonSerializer<StockTickerData>, JsonDeserializer<StockTickerData>> {
+            val jsonSerializer = KafkaJsonSerializer<StockTickerData>()
+            val jsonDeSerializer = JsonDeserializer(StockTickerData::class.java)
             jsonDeSerializer.setRemoveTypeHeaders(false)
             jsonDeSerializer.addTrustedPackages("*")
             jsonDeSerializer.setUseTypeMapperForKey(true)
