@@ -16,13 +16,12 @@ import org.apache.kafka.streams.kstream.Printed
 import org.apache.kafka.streams.kstream.Produced
 import org.apache.kafka.streams.kstream.ValueTransformerSupplier
 import org.apache.kafka.streams.state.Stores
-import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
 @Configuration
 class ZMarketStreamStateStoreListener {
 
-    @Bean
+    // TODO: 10/14 사용 시 Bean 활성화 필요
     fun rewardingProcessor(streamsBuilder: StreamsBuilder): KStream<String, Purchase> {
         val purchaseJsonSerdes = createPurchaseJsonSerdes()
 

@@ -67,6 +67,8 @@ datasource:
 spring.config.activate.on-profile: local
 spring:
   jpa:
+    hibernate:
+      ddl-auto: none
     show-sql: true
     properties:
       hibernate:

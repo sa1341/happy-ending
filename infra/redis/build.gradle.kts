@@ -6,7 +6,9 @@ dependencies {
     implementation(project(":support:model"))
     implementation(project(":support:utils"))
     implementation("org.apache.commons:commons-pool2:2.11.1")
+    implementation("org.springframework.boot:spring-boot-starter-aop")
 
+    api("org.redisson:redisson-spring-boot-starter:3.23.5")
     api("org.springframework.boot:spring-boot-starter-data-redis")
 
     testFixturesImplementation("io.github.microutils:kotlin-logging:1.5.9")

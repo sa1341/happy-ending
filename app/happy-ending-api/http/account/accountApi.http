@@ -9,3 +9,14 @@ x-app-user-id: 209981
 {
     "account_number": "02000162758"
 }
+
+
+### 계좌조번호 등록 V1 API
+POST http://localhost:8080/v1/account
+Content-Type: application/json
+x-app-user-id: 209981
+
+{
+    "account_number": "02000162758",
+    "name": "임준영"
+}

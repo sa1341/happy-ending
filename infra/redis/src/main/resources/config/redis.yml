@@ -1,6 +1,8 @@
 spring:
   data:
     redis:
+      sentinel:
+        master: happymaster
       client-type: lettuce
       lettuce:
         pool:

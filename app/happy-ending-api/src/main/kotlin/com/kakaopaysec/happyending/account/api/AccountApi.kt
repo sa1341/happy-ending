@@ -1,5 +1,7 @@
 package com.kakaopaysec.happyending.account.api
 
+import com.kakaopaysec.happyending.account.model.AccountRegistrationRequest
+import com.kakaopaysec.happyending.account.model.AccountRegistrationResponse
 import com.kakaopaysec.happyending.account.service.AccountResponse
 import com.kakaopaysec.happyending.account.service.AccountService
 import com.kakaopaysec.happyending.config.PaySecUser
@@ -27,6 +29,12 @@ class AccountApi(
             appUserId = paySecUser.appUserId,
             accountNumber = accountNumber.accountNumber
         )
+    }
+
+    @PostMapping
+    fun saveFundProduct(@RequestBody request: AccountRegistrationRequest): AccountRegistrationResponse {
+        log.info { "FundProductRequest = $request" }
+        return accountService.saveAccountNumber(request)
     }
 }
 

@@ -6,6 +6,9 @@ import io.lettuce.core.ClientOptions
 import io.lettuce.core.ReadFrom
 import io.lettuce.core.SocketOptions
 import mu.KotlinLogging
+import org.redisson.Redisson
+import org.redisson.api.RedissonClient
+import org.redisson.config.Config
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.autoconfigure.data.redis.RedisProperties
@@ -74,6 +77,28 @@ class RedisConfiguration(
     }
 
     @Bean
+    fun redissonClient(): RedissonClient {
+        val config = Config()
+        return when (profileUtils.isSentinelRedis()) {
+            true -> {
+                config.useSentinelServers().apply {
+                    this.masterName = redisProperties.sentinel.master
+                    this.addSentinelAddress("${redisProperties.host}:${redisProperties.port}")
+                    if (password != null) this.password = password
+                }
+
+                Redisson.create(config)
+            }
+            false -> {
+                config.useSingleServer().apply {
+                    this.address = "$REDIS_PREFIX${redisProperties.host}:${redisProperties.port}"
+                }
+                Redisson.create(config)
+            }
+        }
+    }
+
+    @Bean
     fun objectRedisTemplate(context: ApplicationContext): RedisTemplate<String, Any> {
         val redisTemplate = RedisTemplate<String, Any>().apply {
             connectionFactory = redisConnectionFactory()
@@ -122,7 +147,9 @@ class RedisConfiguration(
     }
 
     companion object {
-        val DAY_SECENDS: Long = 60 * 60 * 24
-        val CACHE_PREFIX = "CACHE::PENSION::"
+        const val DAY_SECENDS: Long = 60 * 60 * 24
+        const val CACHE_PREFIX = "CACHE::PENSION::"
+        const val SSL_REDIS_PREFIX = "rediss://"
+        const val REDIS_PREFIX = "redis://"
     }
 }

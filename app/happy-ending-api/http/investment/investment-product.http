@@ -1,0 +1,19 @@
+### 펀드상품 등록 V1 API
+POST localhost:8080/api/v1/investment/fund
+Content-Type: application/json
+x-app-user-id: 209981
+
+{
+    "code": "2077001",
+    "name": "미래에셋인도펀드"
+}
+
+### 투자상품모집 참여 V1 API
+POST localhost:8080/api/v1/investment/fund
+Content-Type: application/json
+x-app-user-id: 209981
+
+{
+    "code": "2077001",
+    "name": "미래에셋인도펀드"
+}
