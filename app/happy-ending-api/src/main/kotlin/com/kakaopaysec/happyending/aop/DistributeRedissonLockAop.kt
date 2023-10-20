@@ -1,6 +1,8 @@
 package com.kakaopaysec.happyending.aop
 
 import com.kakaopaysec.happyending.annotation.DistributeRedissonLock
+import com.kakaopaysec.happyending.investment.model.InvestmentProductRequest
+import com.kakaopaysec.happyending.investment.model.InvestmentProductResponse
 import mu.KotlinLogging
 import org.aspectj.lang.ProceedingJoinPoint
 import org.aspectj.lang.annotation.Around
@@ -21,14 +23,14 @@ class DistributeRedissonLockAop(
     @Pointcut("@annotation(com.kakaopaysec.happyending.annotation.DistributeRedissonLock)")
     fun distributeRedissonTarget() {}
 
-/*    @Around("distributeRedissonTarget() && args(userId, request)")
+    @Around("distributeRedissonTarget() && args(accountNumber, request)")
     @Throws(Throwable::class)
-    fun distributeRedissonLock(joinPoint: ProceedingJoinPoint, userId: String): Any? {
+    fun distributeRedissonLock(joinPoint: ProceedingJoinPoint, accountNumber: String, request: InvestmentProductRequest): Any? {
         log.info("distributed Redisson In")
         val signature = joinPoint.signature as MethodSignature
         val method = signature.method
         val redissonLock = method.getAnnotation(DistributeRedissonLock::class.java)
-        val key = userId
+        val key = "${request.fundCode}-$accountNumber"
         val rLock = redissonClient.getLock(key)
 
         return runCatching {
@@ -36,6 +38,7 @@ class DistributeRedissonLockAop(
 
             if (!available) {
                 log.info { "Lock 획득 실패" }
+                return InvestmentProductResponse(id = null, isSuccess = false)
             }
             return redissonTransaction.proceed(joinPoint)
         }.also {
@@ -43,5 +46,5 @@ class DistributeRedissonLockAop(
         }.onFailure {
             throw it
         }
-    }*/
+    }
 }

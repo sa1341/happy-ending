@@ -21,4 +21,6 @@ happy-ending:
 logging:
   level:
     org.springframework.web: DEBUG
+    org.springframework.transaction.interceptor: trace
     com.kakaopaysec.happyending: DEBUG
+

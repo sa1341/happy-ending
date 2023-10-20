@@ -24,8 +24,8 @@ data class FundProductResponse(
 }
 
 data class InvestmentProductRequest(
-    val investmentAmount: Long,
-    val fundCode: String
+    val fundCode: String,
+    val investmentAmount: Long
 )
 
 data class InvestmentProductResponse(

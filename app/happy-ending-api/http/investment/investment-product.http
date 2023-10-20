@@ -9,11 +9,11 @@ x-app-user-id: 209981
 }
 
 ### 투자상품모집 참여 V1 API
-POST localhost:8080/api/v1/investment/fund
+POST localhost:8080/api/v1/investment/participating-investment/02000170444
 Content-Type: application/json
 x-app-user-id: 209981
 
 {
-    "code": "2077001",
-    "name": "미래에셋인도펀드"
+    "fund_code": "2077001",
+    "investment_amount": 120000
 }

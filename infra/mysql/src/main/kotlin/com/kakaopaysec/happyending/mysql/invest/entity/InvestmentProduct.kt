@@ -26,13 +26,22 @@ class InvestmentProduct(
     var id: Long? = null
 
     fun updateInvestAmount(investmentAmount: Long) {
-        if (!isCompletedInvestment(investmentAmount)) {
+        if (!isPossibleInvestment()) {
             throw RuntimeException("모집금액한도를 초과하여 더 이상 투자가 불가합니다. 총 모집금액: ${this.investmentAmount}")
         }
-        this.investmentAmount = investmentAmount
+        val currentInvestmentAmount = this.investmentAmount.plus(investmentAmount)
+        if (limitAmount < currentInvestmentAmount) {
+            val balance = currentInvestmentAmount.minus(limitAmount)
+            println("남은 잔액: $balance")
+            this.investmentAmount = this.investmentAmount.plus(
+                investmentAmount.minus(balance)
+            )
+        } else {
+            this.investmentAmount = currentInvestmentAmount
+        }
     }
 
-    private fun isCompletedInvestment(investmentAmount: Long): Boolean {
-        return this.investmentAmount <= this.limitAmount
+    private fun isPossibleInvestment(): Boolean {
+        return investmentAmount < limitAmount
     }
 }

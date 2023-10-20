@@ -6,7 +6,7 @@ import java.util.concurrent.TimeUnit
 @Retention(AnnotationRetention.RUNTIME)
 annotation class DistributeRedissonLock(
     val timeUnit: TimeUnit = TimeUnit.SECONDS,
-    val waitTime: Long = 1L,
+    val waitTime: Long = 3L,
     val leaseTime: Long = 10L
 )
 

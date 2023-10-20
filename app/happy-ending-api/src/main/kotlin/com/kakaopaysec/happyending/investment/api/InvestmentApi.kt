@@ -1,5 +1,6 @@
 package com.kakaopaysec.happyending.investment.api
 
+import com.kakaopaysec.happyending.annotation.DistributeRedissonLock
 import com.kakaopaysec.happyending.investment.model.FundProductRequest
 import com.kakaopaysec.happyending.investment.model.FundProductResponse
 import com.kakaopaysec.happyending.investment.model.InvestmentProductRequest
@@ -24,11 +25,11 @@ class InvestmentApi(
 ) {
 
     @PostMapping("participating-investment/{account_number}")
-    fun participateInvestment(
+    fun participateInvestmentEvent(
         @PathVariable("account_number") accountNumber: String,
         @RequestBody request: InvestmentProductRequest
     ): InvestmentProductResponse {
-        return investmentProductService.participateInvestment(
+        return investmentProductService.participateInvestmentEvent(
             accountNumber = accountNumber,
             request = request
         )
