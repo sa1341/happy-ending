@@ -9,4 +9,3 @@ annotation class DistributeRedissonLock(
     val waitTime: Long = 3L,
     val leaseTime: Long = 10L
 )
-

@@ -9,6 +9,7 @@ import com.kakaopaysec.happyending.mysql.invest.entity.InvestmentProductHistory
 import com.kakaopaysec.happyending.mysql.invest.repository.InvestmentProductHistoryRepository
 import com.kakaopaysec.happyending.mysql.invest.repository.InvestmentProductRepository
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
 @Service
 class InvestmentProductService(
@@ -18,6 +19,10 @@ class InvestmentProductService(
     private val investmentProductHistoryRepository: InvestmentProductHistoryRepository
 ) {
 
+    /**
+     * Redisson Client를 이용한 분산락 처리
+     */
+    @Transactional
     @DistributeRedissonLock
     fun participateInvestmentEvent(
         accountNumber: String,
@@ -49,6 +54,7 @@ class InvestmentProductService(
         )
     }
 
+    @Transactional
     fun participateInvestment(
         accountNumber: String,
         request: InvestmentProductRequest
