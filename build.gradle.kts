@@ -77,6 +77,7 @@ subprojects {
         testImplementation("io.mockk:mockk:1.13.5")
         testImplementation("com.ninja-squad:springmockk:4.0.2")
         testImplementation("io.kotest:kotest-runner-junit5-jvm:5.6.2")
+        testImplementation("com.navercorp.fixturemonkey:fixture-monkey-starter-kotlin:1.0.4")
     }
 
     tasks {
