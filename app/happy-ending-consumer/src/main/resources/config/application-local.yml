@@ -6,13 +6,27 @@ spring:
     stream:
       kafka:
         binder:
-          brokers: localhost:9092
-      binders:
-        retail-kafka:
+          brokers: localhost:9092,localhost:9093,localhost:9094
+          producer-properties:
+            key.serializer: org.apache.kafka.common.serialization.StringSerializer
+          consumer-properties:
+            auto.offset.reset: latest
+        bindings:
+          topicConsumer-in-0:
+            consumer:
+              start-offset: latest
+      bindings:
+        topicConsumer-in-0:
+          destination: stream-topic
+          consumer:
+            batch-mode: false
+          group: happyEndingGroup
+    function:
+      definition: topicConsumer
   kafka:
-    bootstrap-servers: localhost:9092
     consumer:
-      group-id: happyGroup
+      group-id: happyEndingGroup
+    bootstrap-servers: localhost:9092,localhost:9093,localhost:9094
 
 logging:
   level:

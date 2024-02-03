@@ -1,21 +1,3 @@
 spring:
   application:
     name: happy-ending-consumer
-  kafka:
-    streams:
-      application-id: happy-ending-consumer_id
-      bootstrap-servers: localhost:9092
-  cloud:
-    stream:
-      function:
-        definition: topicConsumer
-      bindings:
-        topicConsumer-in-0:
-          destination: stream-topic
-          group: happyGroup
-          consumer:
-            batch-mode: false
-          binder: retail-kafka
-      binders:
-        retail-kafka:
-          type: kafka

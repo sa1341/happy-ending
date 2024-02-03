@@ -15,7 +15,7 @@ dependencies {
     implementation(project(":support:model"))
     implementation(project(":support:yaml-importer"))
     implementation("commons-io:commons-io:2.13.0")
-    implementation("org.springframework.cloud:spring-cloud-starter-vault-config")
+    //implementation("org.springframework.cloud:spring-cloud-starter-vault-config")
     implementation(testFixtures(project(":support:testkit")))
 
     testImplementation("org.springframework.restdocs:spring-restdocs-asciidoctor")
