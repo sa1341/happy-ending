@@ -14,19 +14,13 @@ import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import com.kakaopaysec.happyending.consumer.market.model.Purchase
-import com.kakaopaysec.happyending.consumer.market.model.PurchasePattern
-import com.kakaopaysec.happyending.consumer.market.model.RewardAccumulator
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Primary
-import org.springframework.kafka.support.serializer.JsonDeserializer
 import java.math.BigDecimal
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
-import org.springframework.kafka.support.serializer.JsonSerializer as KafkaJsonSerializer
-import com.kakaopaysec.happyending.consumer.stock.model.StockTickerData
 
 @Configuration
 class KafkaJacksonConfig {
@@ -75,40 +69,5 @@ class KafkaJacksonConfig {
         val datePattern: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMdd")
         val dateTimePattern: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMdd HH:mm:ss")
 
-        fun createPurchaseJsonSerdes(): Pair<KafkaJsonSerializer<Purchase>, JsonDeserializer<Purchase>> {
-            val jsonSerializer = KafkaJsonSerializer<Purchase>()
-            val jsonDeSerializer = JsonDeserializer(Purchase::class.java)
-            jsonDeSerializer.setRemoveTypeHeaders(false)
-            jsonDeSerializer.addTrustedPackages("*")
-            jsonDeSerializer.setUseTypeMapperForKey(true)
-            return Pair(jsonSerializer, jsonDeSerializer)
-        }
-
-        fun createPurchasePatternJsonSerdes(): Pair<KafkaJsonSerializer<PurchasePattern>, JsonDeserializer<PurchasePattern>> {
-            val jsonSerializer = KafkaJsonSerializer<PurchasePattern>()
-            val jsonDeSerializer = JsonDeserializer(PurchasePattern::class.java)
-            jsonDeSerializer.setRemoveTypeHeaders(false)
-            jsonDeSerializer.addTrustedPackages("*")
-            jsonDeSerializer.setUseTypeMapperForKey(true)
-            return Pair(jsonSerializer, jsonDeSerializer)
-        }
-
-        fun createRewardAccumulatorJsonSerdes(): Pair<KafkaJsonSerializer<RewardAccumulator>, JsonDeserializer<RewardAccumulator>> {
-            val jsonSerializer = KafkaJsonSerializer<RewardAccumulator>()
-            val jsonDeSerializer = JsonDeserializer(RewardAccumulator::class.java)
-            jsonDeSerializer.setRemoveTypeHeaders(false)
-            jsonDeSerializer.addTrustedPackages("*")
-            jsonDeSerializer.setUseTypeMapperForKey(true)
-            return Pair(jsonSerializer, jsonDeSerializer)
-        }
-
-        fun createStockTickerJsonSerdes(): Pair<KafkaJsonSerializer<StockTickerData>, JsonDeserializer<StockTickerData>> {
-            val jsonSerializer = KafkaJsonSerializer<StockTickerData>()
-            val jsonDeSerializer = JsonDeserializer(StockTickerData::class.java)
-            jsonDeSerializer.setRemoveTypeHeaders(false)
-            jsonDeSerializer.addTrustedPackages("*")
-            jsonDeSerializer.setUseTypeMapperForKey(true)
-            return Pair(jsonSerializer, jsonDeSerializer)
-        }
     }
 }

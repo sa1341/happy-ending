@@ -6,7 +6,6 @@ spring:
     stream:
       kafka:
         binder:
-          brokers: localhost:9092,localhost:9093,localhost:9094
           producer-properties:
             key.serializer: org.apache.kafka.common.serialization.StringSerializer
           consumer-properties:
@@ -14,19 +13,24 @@ spring:
         bindings:
           topicConsumer-in-0:
             consumer:
-              start-offset: latest
+              start-offset: earliest
+              dlq-name: topicConsumerFail
+              enable-dlq: true
       bindings:
         topicConsumer-in-0:
           destination: stream-topic
           consumer:
             batch-mode: false
           group: happyEndingGroup
+          binder: retail-kafka
+      binders:
+        retail-kafka:
+          type: kafka
+          environment:
+            spring.cloud.stream.kafka.binder:
+              brokers: localhost:9092,localhost:9093,localhost:9094
     function:
       definition: topicConsumer
-  kafka:
-    consumer:
-      group-id: happyEndingGroup
-    bootstrap-servers: localhost:9092,localhost:9093,localhost:9094
 
 logging:
   level:

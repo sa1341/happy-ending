@@ -10,7 +10,7 @@ import org.springframework.kafka.core.DefaultKafkaConsumerFactory
 import org.springframework.kafka.listener.ContainerProperties
 @Configuration
 class TopicConsumerConfig(
-    @Value("\${spring.kafka.bootstrap-servers}")
+    @Value("\${spring.kafka.bootstrap-servers:localhost:9092,localhost:9093,localhost:9094}")
     private val bootstrapServers: String
 ) {
 
