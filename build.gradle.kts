@@ -37,17 +37,10 @@ subprojects {
     group = "com.kakaopaysec.happy-ending"
     version = "1.0.0"
     java.sourceCompatibility = Versions.java
-    extra["springCloudVersion"] = "2022.0.3"
 
     dependencyManagement {
-        dependencies {
-            dependencySet("io.github.resilience4j:2.0.2") {
-                entry("resilience4j-spring-boot3")
-            }
-        }
-
         imports {
-            mavenBom("org.springframework.cloud:spring-cloud-dependencies:${property("springCloudVersion")}")
+            mavenBom("org.springframework.cloud:spring-cloud-dependencies:${Versions.SPRING_CLOUD_VERSION}")
         }
     }
 
@@ -55,29 +48,52 @@ subprojects {
     val architecture = System.getProperty("os.arch").toLowerCase()
 
     dependencies {
-        implementation("org.springframework.boot:spring-boot-starter-actuator")
-        implementation("org.springframework.boot:spring-boot-starter")
         implementation("org.springframework.boot:spring-boot-starter-web")
         implementation("org.springframework.boot:spring-boot-starter-webflux")
         implementation("org.springframework.cloud:spring-cloud-stream")
+        implementation("org.springframework.cloud:spring-cloud-starter-stream-kafka")
+
+        // prometheus
+        implementation("org.springframework.boot:spring-boot-starter-actuator")
+
+        // resilience4j
         implementation("io.github.resilience4j:resilience4j-spring-boot3")
         implementation("io.github.resilience4j:resilience4j-reactor")
+        implementation("io.github.resilience4j:resilience4j-circuitbreaker")
+        implementation("io.github.resilience4j:resilience4j-timelimiter")
+        implementation("io.github.resilience4j:resilience4j-kotlin")
+
+        // cache
+        implementation("org.springframework.boot:spring-boot-starter-cache")
+        implementation("com.github.ben-manes.caffeine:caffeine")
+
+        // logging
         implementation("org.jetbrains.kotlinx:kotlinx-coroutines-slf4j")
         implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
         implementation("org.jetbrains.kotlin:kotlin-reflect")
         implementation("io.github.microutils:kotlin-logging:${Versions.KOTLIN_LOGGING}")
+
+        // util
+        implementation("org.apache.commons:commons-lang3:${Versions.COMMONS_LANG3}")
+        implementation("commons-io:commons-io:${Versions.COMMONS_IO}")
+
         if (isMacOS && architecture == "aarch64") {
             implementation("io.netty:netty-resolver-dns-native-macos:4.1.79.Final:osx-aarch_64")
         }
 
+        // 개발 tools
+        developmentOnly("org.springframework.boot:spring-boot-devtools")
+        kapt("org.springframework.boot:spring-boot-configuration-processor")
         annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
+
+        // test
         testImplementation("org.springframework.boot:spring-boot-starter-test") {
             exclude(module = "mockito-core")
         }
-        testImplementation("io.mockk:mockk:1.13.5")
-        testImplementation("com.ninja-squad:springmockk:4.0.2")
-        testImplementation("io.kotest:kotest-runner-junit5-jvm:5.6.2")
-        testImplementation("com.navercorp.fixturemonkey:fixture-monkey-starter-kotlin:1.0.4")
+        testImplementation("io.mockk:mockk:${Versions.MOCKK_VERSION}")
+        testImplementation("com.ninja-squad:springmockk:${Versions.SPRING_MOCK_VERSION}")
+        testImplementation("io.kotest:kotest-runner-junit5-jvm:${Versions.KOTEST_VERSION}")
+        testImplementation("com.navercorp.fixturemonkey:fixture-monkey-starter-kotlin:${Versions.FIXTURE_MONKEY_VERSION}")
     }
 
     tasks {

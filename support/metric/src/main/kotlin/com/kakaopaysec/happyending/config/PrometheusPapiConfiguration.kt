@@ -11,6 +11,9 @@ import org.springframework.security.core.userdetails.User
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.provisioning.InMemoryUserDetailsManager
 import org.springframework.security.web.SecurityFilterChain
+import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher
+import org.springframework.web.servlet.handler.HandlerMappingIntrospector
 
 @Configuration
 @EnableWebSecurity
@@ -22,16 +25,19 @@ class PrometheusPapiConfiguration(
     private val password: String
 ) {
     @Bean
-    fun filterChain(http: HttpSecurity): SecurityFilterChain {
+    fun filterChain(
+        http: HttpSecurity,
+        introspector: HandlerMappingIntrospector
+    ): SecurityFilterChain {
         return http
             .csrf {
                 it.disable()
             }
             .authorizeHttpRequests { authCustomizer ->
                 authCustomizer
-                    .requestMatchers("/actuator/prometheus")
+                    .requestMatchers(MvcRequestMatcher(introspector, "/actuator/prometheus"))
                     .hasRole("prometheus-user")
-                    .requestMatchers("/**")
+                    .requestMatchers(AntPathRequestMatcher("/**"))
                     .permitAll()
             }
             .httpBasic(withDefaults())

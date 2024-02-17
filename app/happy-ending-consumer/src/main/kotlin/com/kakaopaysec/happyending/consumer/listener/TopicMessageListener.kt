@@ -1,5 +1,6 @@
 package com.kakaopaysec.happyending.consumer.listener
 
+import com.fasterxml.jackson.databind.ObjectMapper
 import mu.KotlinLogging
 import org.apache.kafka.clients.consumer.ConsumerRecord
 import org.springframework.kafka.annotation.DltHandler
@@ -10,7 +11,9 @@ import org.springframework.stereotype.Component
 private val log = KotlinLogging.logger {}
 
 @Component
-class TopicMessageListener {
+class TopicMessageListener(
+    private val kafkaJacksonMapper: ObjectMapper
+) {
 
     @KafkaListener(
         topics = ["basic-topic"],
@@ -30,6 +33,7 @@ class TopicMessageListener {
     @DltHandler
     fun handleDlq(record: ConsumerRecord<String, String>, ack: Acknowledgment) {
         log.error { "DLQ: ${record.value()}" }
+        ack.acknowledge()
     }
 }
 
