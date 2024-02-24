@@ -14,9 +14,9 @@ class TopicStreamConsumerListener(
 ) {
     // spring cloud stream 기본 컨슈밍을 위한 의사코드 입니다. 실제로 사용 시에는 @Bean 등록이 필요함.
     @Bean
-    fun topicConsumer() = Consumer<String> { value ->
-        val person = kafkaJacksonMapper.readValue(value, Person::class.java)
+    fun topicConsumer() = Consumer<Person> { person ->
         if (person.name == "진카미") throw IllegalArgumentException("dlq test")
         log.info { "result = $person" }
     }
 }
+

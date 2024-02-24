@@ -21,7 +21,7 @@ class TopicMessageListener(
         containerFactory = "kafkaListenerContainerFactory"
     )
     fun handle(record: ConsumerRecord<String, String>, ack: Acknowledgment) {
-        log.info { "data = ${record.value()}" }
+        log.info { record.value() }
         ack.acknowledge()
     }
 
@@ -31,7 +31,7 @@ class TopicMessageListener(
         containerFactory = "kafkaListenerContainerFactory"
     )
     @DltHandler
-    fun handleDlq(record: ConsumerRecord<String, String>, ack: Acknowledgment) {
+    fun handleDlq(record: ConsumerRecord<String, Person>, ack: Acknowledgment) {
         log.error { "DLQ: ${record.value()}" }
         ack.acknowledge()
     }

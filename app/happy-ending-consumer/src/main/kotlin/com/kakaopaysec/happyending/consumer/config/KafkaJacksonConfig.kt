@@ -68,6 +68,5 @@ class KafkaJacksonConfig {
     companion object {
         val datePattern: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMdd")
         val dateTimePattern: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMdd HH:mm:ss")
-
     }
 }

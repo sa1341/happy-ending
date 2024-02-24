@@ -8,29 +8,29 @@ spring:
         binder:
           producer-properties:
             key.serializer: org.apache.kafka.common.serialization.StringSerializer
+            value.serializer: org.springframework.kafka.support.serializer.JsonSerializer
           consumer-properties:
             auto.offset.reset: latest
         bindings:
           topicConsumer-in-0:
             consumer:
-              start-offset: earliest
               dlq-name: topicConsumerFail
               enable-dlq: true
       bindings:
         topicConsumer-in-0:
           destination: stream-topic
           consumer:
+            max-attempts: 3
             batch-mode: false
           group: happyEndingGroup
-          binder: retail-kafka
+          binder: inner-kafka
       binders:
-        retail-kafka:
+        inner-kafka:
           type: kafka
           environment:
             spring.cloud.stream.kafka.binder:
               brokers: localhost:9092,localhost:9093,localhost:9094
-    function:
-      definition: topicConsumer
+      default-binder: inner-kafka
 
 logging:
   level:
