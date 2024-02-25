@@ -24,6 +24,14 @@ spring:
             batch-mode: false
           group: happyEndingGroup
           binder: inner-kafka
+        chargeConsumer-in-0:
+          error-handler-definition: myErrorHandler
+          destination: acc.charge.event.v1
+          consumer:
+            max-attempts: 1
+            batch-mode: false
+          group: happyEndingGroup
+          binder: inner-kafka
       binders:
         inner-kafka:
           type: kafka
