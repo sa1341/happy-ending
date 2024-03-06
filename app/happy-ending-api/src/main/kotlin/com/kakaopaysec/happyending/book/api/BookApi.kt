@@ -27,6 +27,12 @@ class BookApi(
         return bookPublication
     }
 
+    @PostMapping("/publication-book")
+    fun publishBook(@RequestBody request: BookPublish) {
+        log.debug { "BookPublication: $request" }
+        bookService.publishBook(request)
+    }
+
     @GetMapping("/{bookId}")
     fun getBook(@PathVariable("bookId") bookId: Long): ResponseEntity<BookDto?> {
         log.debug { "bookId: $bookId" }
@@ -34,6 +40,11 @@ class BookApi(
         return ResponseEntity.ok().body(result)
     }
 }
+
+data class BookPublish(
+    val name: String,
+    val age: Int
+)
 
 data class BookPublication(
     val name: String,

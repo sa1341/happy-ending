@@ -44,6 +44,29 @@ class SecuritiesClientService(
             } ?: throw SecuritiesException.of(SecuritiesErrorCode.LEDGER_RESPONSE_DATA_NULL)
     }
 
+    fun <U : Any> callHttpByPost(
+        serviceType: ServiceType,
+        bookPublish: BookPublish,
+        responseType: ParameterizedTypeReference<U>
+    ): U {
+        return webClient
+            .post()
+            .uri("/api/v1/books")
+            .contentType(MediaType.APPLICATION_JSON)
+            .bodyValue(bookPublish)
+            .retrieve()
+            .onStatus(HttpStatusCode::isError) { response ->
+                onStatus(response)
+            }
+            .bodyToFlux(responseType)
+            .retryWhen(CustomRetry.create(serviceType))
+            .onErrorMap { error -> SecuritiesCommon.onErrorMap(error) }
+            .blockFirst()
+            ?.also {
+                log.info { "Response: $it" }
+            } ?: throw SecuritiesException.of(SecuritiesErrorCode.LEDGER_RESPONSE_DATA_NULL)
+    }
+
     private fun onStatus(
         response: ClientResponse
     ) = response.bodyToMono(String::class.java).map { responseMessage ->
@@ -74,3 +97,8 @@ class SecuritiesClientService(
         }.getOrThrow()
     }
 }
+
+data class BookPublish(
+    val name: String,
+    val age: Int
+)

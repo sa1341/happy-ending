@@ -1,7 +1,6 @@
 package com.kakaopaysec.happyending
 
 import mu.KotlinLogging
-import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.WebApplicationType
 import org.springframework.boot.autoconfigure.SpringBootApplication
@@ -10,7 +9,6 @@ import kotlin.system.exitProcess
 
 private val log = KotlinLogging.logger {}
 
-@EnableBatchProcessing(dataSourceRef = "happyDataSource")
 @SpringBootApplication
 class HappyEndingBatchApplication
 
