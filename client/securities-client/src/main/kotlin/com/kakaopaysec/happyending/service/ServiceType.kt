@@ -5,5 +5,6 @@ enum class ServiceType(
     val isRetry: Boolean
 ) {
     GET_BOOK("/api/v1/books", true),
-    PUBLISH_BOOK("/api/v1/books", true)
+    PUBLISH_BOOK("/api/v1/books", true),
+    INVESTMENT_PRODUCT("/api/v1/investments", false)
 }
