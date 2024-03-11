@@ -77,6 +77,10 @@ subprojects {
         implementation("org.apache.commons:commons-lang3:${Versions.COMMONS_LANG3}")
         implementation("commons-io:commons-io:${Versions.COMMONS_IO}")
 
+        implementation("com.mysql:mysql-connector-j")
+        implementation("com.querydsl:querydsl-jpa:5.0.0:jakarta")
+        kapt("com.querydsl:querydsl-apt:5.0.0:jakarta")
+
         if (isMacOS && architecture == "aarch64") {
             implementation("io.netty:netty-resolver-dns-native-macos:4.1.79.Final:osx-aarch_64")
         }
@@ -94,6 +98,7 @@ subprojects {
         testImplementation("com.ninja-squad:springmockk:${Versions.SPRING_MOCK_VERSION}")
         testImplementation("io.kotest:kotest-runner-junit5-jvm:${Versions.KOTEST_VERSION}")
         testImplementation("com.navercorp.fixturemonkey:fixture-monkey-starter-kotlin:${Versions.FIXTURE_MONKEY_VERSION}")
+        testImplementation("com.h2database:h2")
     }
 
     tasks {
