@@ -44,6 +44,10 @@ resilience4j:
       instances:
         base-config: default
 ---
+spring.config.activate.on-profile: test
+base:
+  url: http://localhost:8080
+---
 spring.config.activate.on-profile: local
 base:
   url: http://localhost:8081

@@ -4,3 +4,7 @@ spring:
   config:
     import:
       - metric.yml
+
+happy-ending:
+  file:
+    path: /Users/limjun-young/workspace/private/dev/test-dir

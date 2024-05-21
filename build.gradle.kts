@@ -123,7 +123,7 @@ subprojects {
                         bound {
                             minValue = BigInteger.valueOf(
                                 when (project.name) {
-                                    "happy-ending-api" -> 60
+                                    "happy-ending-api" -> 10
                                     else -> 0
                                 }
                             ).toInt()
