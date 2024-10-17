@@ -18,7 +18,7 @@ private val log = KotlinLogging.logger {}
 @RequestMapping("/api/v1/books")
 @RestController
 class BookApi(
-    private val bookService: BookService
+    private val bookService: BookService,
 ) {
 
     @PostMapping("/publication")
@@ -43,11 +43,11 @@ class BookApi(
 
 data class BookPublish(
     val name: String,
-    val age: Int
+    val age: Int,
 )
 
 data class BookPublication(
     val name: String,
     val date: LocalDate,
-    val dateTime: LocalDateTime
+    val dateTime: LocalDateTime,
 )

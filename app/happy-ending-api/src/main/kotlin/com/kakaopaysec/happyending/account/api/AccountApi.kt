@@ -16,13 +16,13 @@ private val log = KotlinLogging.logger {}
 @RequestMapping("/v1/account")
 @RestController
 class AccountApi(
-    private val accountService: AccountService
+    private val accountService: AccountService,
 ) {
 
     @PostMapping("/get")
     fun getPensionAccount(
         paySecUser: PaySecUser,
-        @RequestBody accountNumber: AccountNumber
+        @RequestBody accountNumber: AccountNumber,
     ): AccountResponse {
         log.debug { "PaySecUser: $paySecUser, AccountNumber: ${accountNumber.accountNumber}" }
         return accountService.getAccountNumber(
@@ -39,10 +39,10 @@ class AccountApi(
 }
 
 open class AccountNumber(
-    open val accountNumber: String
+    open val accountNumber: String,
 )
 
 data class SecretDto(
     val id: String,
-    val password: String
+    val password: String,
 )

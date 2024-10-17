@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component
 
 @Component
 class InvestmentProductProcessor(
-    private val investmentProductService: InvestmentProductService
+    private val investmentProductService: InvestmentProductService,
 ) : ItemProcessor<InvestmentProductRequest, InvestmentProductRequest> {
 
     override fun process(item: InvestmentProductRequest): InvestmentProductRequest? {

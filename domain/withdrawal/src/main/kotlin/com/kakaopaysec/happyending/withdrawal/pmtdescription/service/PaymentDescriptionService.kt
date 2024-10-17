@@ -13,5 +13,5 @@ class PaymentDescriptionService(
     private val cRecordRepository: CRecordRepository,
     private val dRecordRepository: DRecordRepository,
     private val gRecordRepository: GRecordRepository,
-    private val finalRecordRepository: FinalRecordRepository
+    private val finalRecordRepository: FinalRecordRepository,
 )

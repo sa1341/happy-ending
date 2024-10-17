@@ -17,14 +17,14 @@ open class QuerydslItemReader<T>(
     name: String?,
     protected val pageSize: Int,
     protected val entityManagerFactory: EntityManagerFactory,
-    private val jpaPropertyMap: Map<String, Any> = hashMapOf()
+    private val jpaPropertyMap: Map<String, Any> = hashMapOf(),
 ) : AbstractItemCountingItemStreamItemReader<T>() {
 
     constructor(
         name: String?,
         pageSize: Int,
         entityManagerFactory: EntityManagerFactory,
-        query: QuerydslItemReaderQuery<T>
+        query: QuerydslItemReaderQuery<T>,
     ) : this(
         name,
         pageSize,

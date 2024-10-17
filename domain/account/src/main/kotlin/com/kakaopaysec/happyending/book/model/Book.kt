@@ -9,5 +9,5 @@ data class Book(
     val isbn: String,
     val publishDate: String,
     val createdAt: String,
-    val modifiedAt: String
+    val modifiedAt: String,
 )

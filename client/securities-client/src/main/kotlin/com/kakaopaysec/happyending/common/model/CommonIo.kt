@@ -16,7 +16,7 @@ private val whiteListErrorCodes = listOf<String>("22718")
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class MessageResult(
     @JsonProperty("message")
-    val message: SecuritiesClientMessage
+    val message: SecuritiesClientMessage,
 )
 
 interface AbstractSecuritiesClientResponse {
@@ -28,7 +28,7 @@ interface AbstractSecuritiesClientResponse {
 data class SecuritiesClientMessage(
     @JsonProperty("th_msg_oput_tcd") val messageOutputType: String,
     @JsonProperty("msg_cod") val messageCode: String,
-    @JsonProperty("msg_cn") val messageContent: String
+    @JsonProperty("msg_cn") val messageContent: String,
 ) {
     fun isSuccess() = this.messageOutputType == OUTPUT_SUCCESS_TYPE
     companion object {
@@ -40,7 +40,7 @@ data class SecuritiesClientResult<U>(
     override val commonHeader: SecuritiesClientHeader,
     override val message: SecuritiesClientMessage,
     val data: U?,
-    val success: Boolean
+    val success: Boolean,
 ) : AbstractSecuritiesClientResponse {
     override fun validate() {
         if (message.isSuccess() && data == null) {
@@ -59,7 +59,7 @@ data class SecuritiesClientResult<U>(
 
 data class SecuritiesClientCommand<T : Any>(
     val commonHeader: SecuritiesClientHeader,
-    val data: T
+    val data: T,
 ) {
     companion object {
         fun <R : Any> of(
@@ -69,7 +69,7 @@ data class SecuritiesClientCommand<T : Any>(
             mediaCode: MediaCode,
             pageRequest: PageRequest? = null,
             continueTransactionKeyList: List<String> = emptyList(),
-            appUserId: String? = null
+            appUserId: String? = null,
         ): SecuritiesClientCommand<R> {
             return SecuritiesClientCommand(
                 commonHeader = SecuritiesClientHeader.of(
@@ -103,10 +103,10 @@ data class SecuritiesClientHeader(
     // 페이징
     @JsonProperty("cont_trkey") val continueTransactionKeyList: List<String> = emptyList(), // 다음페이지키
     @JsonProperty("th_qry_c") val size: String = "20",
-    @JsonProperty("th_cont_tr_tcd") val continueTransactionCode: String? = "" // 7: 다음페이지 있음, 4: 다음페이지 없음
+    @JsonProperty("th_cont_tr_tcd") val continueTransactionCode: String? = "", // 7: 다음페이지 있음, 4: 다음페이지 없음
 ) {
     companion object {
-        fun generateGuid() = GuidUtils.generateSecuritiesGuid()
+        fun generateGuid() = GuidUtils.generateGuid()
 
         private val defaultPageSize = SpringDataWebProperties().pageable.defaultPageSize
 
@@ -116,7 +116,7 @@ data class SecuritiesClientHeader(
             appUserId: String?,
             mediaCode: MediaCode,
             pageRequest: PageRequest? = null,
-            continueTransactionKeyList: List<String> = emptyList()
+            continueTransactionKeyList: List<String> = emptyList(),
         ): SecuritiesClientHeader {
             return SecuritiesClientHeader(
                 serviceId = serviceId,

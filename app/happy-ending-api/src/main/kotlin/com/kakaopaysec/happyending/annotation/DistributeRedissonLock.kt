@@ -7,5 +7,5 @@ import java.util.concurrent.TimeUnit
 annotation class DistributeRedissonLock(
     val timeUnit: TimeUnit = TimeUnit.SECONDS,
     val waitTime: Long = 3L,
-    val leaseTime: Long = 10L
+    val leaseTime: Long = 10L,
 )

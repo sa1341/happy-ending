@@ -11,12 +11,12 @@ class OasSampleApi {
 
     @GetMapping("/{sampleId}")
     fun getSampleById(
-        @PathVariable sampleId: String
+        @PathVariable sampleId: String,
     ): SampleResponse =
         SampleResponse(sampleId, "sample-$sampleId")
 }
 
 data class SampleResponse(
     val sampleId: String,
-    val name: String
+    val name: String,
 )

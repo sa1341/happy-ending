@@ -17,7 +17,7 @@ class ServiceAgreement(
     val serviceCode: String,
     val accountNumber: String,
     var status: String,
-    val serviceGroupId: String
+    val serviceGroupId: String,
 ) {
     fun modifyStatus(changedStatus: String) {
         this.status = changedStatus

@@ -36,13 +36,13 @@ class WebClientConfiguration(
     @Value("\${base.url}")
     val baseUrl: String,
     private val reactorResourceFactory: ReactorResourceFactory,
-    private val apiJsonLogger: ApiJsonLogger
+    private val apiJsonLogger: ApiJsonLogger,
 ) {
 
     @Bean
     fun happyEndingClient(
         @Qualifier("happyEndingObjectMapper")
-        happyEndingObjectMapper: ObjectMapper
+        happyEndingObjectMapper: ObjectMapper,
     ): WebClient {
         return builder()
             .exchangeStrategies(exchangeStrategies(happyEndingObjectMapper))

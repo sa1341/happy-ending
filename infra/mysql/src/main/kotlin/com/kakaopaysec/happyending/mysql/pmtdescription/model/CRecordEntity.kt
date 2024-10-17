@@ -336,5 +336,5 @@ class CRecordEntity(
     val orgDpntEtcIcmLitx: BigDecimal? = null,
 
     @Column(name = "org_dpnt_etc_intx_sum_a")
-    val orgDpntEtcIntxSumA: BigDecimal? = null
+    val orgDpntEtcIntxSumA: BigDecimal? = null,
 )

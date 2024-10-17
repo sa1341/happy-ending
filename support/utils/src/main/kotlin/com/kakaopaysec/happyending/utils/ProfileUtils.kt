@@ -7,7 +7,7 @@ import java.util.EnumSet
 
 @Component
 class ProfileUtils(
-    val environment: Environment
+    val environment: Environment,
 ) {
 
     fun getActiveProfile(): Profile {
@@ -27,7 +27,8 @@ enum class Profile {
     DEV,
     SANDBOX,
     BETA,
-    PRODUCTION;
+    PRODUCTION,
+    ;
 
     fun toSystemCode(): SystemCode {
         return when (this) {

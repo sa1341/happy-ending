@@ -19,13 +19,13 @@ private val log = KotlinLogging.logger {}
 @Component
 class SecuritiesClientService(
     @Qualifier("happyEndingClient")
-    private val webClient: WebClient
+    private val webClient: WebClient,
 ) {
 
     fun <U : Any> callHttpByGet(
         serviceType: ServiceType,
         bookId: Long,
-        responseType: ParameterizedTypeReference<U>
+        responseType: ParameterizedTypeReference<U>,
     ): U {
         return webClient
             .get()
@@ -47,7 +47,7 @@ class SecuritiesClientService(
     fun <U : Any> callHttpByPost(
         serviceType: ServiceType,
         bookPublish: BookPublish,
-        responseType: ParameterizedTypeReference<U>
+        responseType: ParameterizedTypeReference<U>,
     ): U {
         return webClient
             .post()
@@ -70,7 +70,7 @@ class SecuritiesClientService(
     fun <U : Any> callApi(
         serviceType: ServiceType,
         investmentProductRequest: InvestmentProductRequest,
-        responseType: ParameterizedTypeReference<U>
+        responseType: ParameterizedTypeReference<U>,
     ): U {
         return webClient
             .post()
@@ -91,7 +91,7 @@ class SecuritiesClientService(
     }
 
     private fun onStatus(
-        response: ClientResponse
+        response: ClientResponse,
     ) = response.bodyToMono(String::class.java).map { responseMessage ->
         log.info {
             """
@@ -123,10 +123,10 @@ class SecuritiesClientService(
 
 data class BookPublish(
     val name: String,
-    val age: Int
+    val age: Int,
 )
 
 data class InvestmentProductRequest(
     val fundCode: String,
-    val investmentAmount: Long
+    val investmentAmount: Long,
 )

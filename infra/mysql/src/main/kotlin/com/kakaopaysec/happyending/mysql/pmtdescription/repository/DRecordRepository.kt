@@ -8,12 +8,12 @@ interface DRecordRepository : JpaRepository<DRecordEntity, Long> {
         accountNumber: String,
         baseYear: String,
         createdAt: String,
-        createdSeq: Long
+        createdSeq: Long,
     ): DRecordEntity?
 
     fun findByTradeAtAndTradeSeqAndAccountNumber(
         tradeAt: String,
         tradeSeq: Long,
-        accountNumber: String
+        accountNumber: String,
     ): DRecordEntity?
 }

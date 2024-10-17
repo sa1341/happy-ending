@@ -12,7 +12,7 @@ private val log = KotlinLogging.logger {}
 
 @Configuration
 class TopicStreamConsumerListener(
-    private val kafkaJacksonMapper: ObjectMapper
+    private val kafkaJacksonMapper: ObjectMapper,
 ) {
     // spring cloud stream 기본 컨슈밍을 위한 의사코드 입니다. 실제로 사용 시에는 @Bean 등록이 필요함.
     @Bean

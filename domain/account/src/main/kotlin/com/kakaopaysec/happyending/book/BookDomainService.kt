@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component
 
 @Component
 class BookDomainService(
-    private val securitiesClientService: SecuritiesClientService
+    private val securitiesClientService: SecuritiesClientService,
 ) {
 
     fun getBook(bookId: Long): Book {

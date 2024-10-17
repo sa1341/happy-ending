@@ -10,7 +10,7 @@ import java.io.OutputStreamWriter
 import java.io.PrintWriter
 
 class OutputStreamCopiedHttpResponseWrapper(
-    response: HttpServletResponse
+    response: HttpServletResponse,
 ) : HttpServletResponseWrapper(response) {
     private val outputStream: ServletOutputStream = response.outputStream
     private val copier: OutputStreamCopier = OutputStreamCopier(outputStream)
@@ -34,7 +34,7 @@ class OutputStreamCopiedHttpResponseWrapper(
 }
 
 internal class OutputStreamCopier(
-    private val outputStream: OutputStream?
+    private val outputStream: OutputStream?,
 ) : ServletOutputStream() {
 
     private val copy: ByteArrayOutputStream = ByteArrayOutputStream(1024)

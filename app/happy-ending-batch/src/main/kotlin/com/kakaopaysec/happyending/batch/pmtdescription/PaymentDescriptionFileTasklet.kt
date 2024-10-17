@@ -14,7 +14,7 @@ import java.time.LocalDate
 @StepScope
 class PaymentDescriptionFileTasklet(
     private val environment: Environment,
-    private val profileUtils: ProfileUtils
+    private val profileUtils: ProfileUtils,
 ) : Tasklet {
 
     override fun execute(contribution: StepContribution, chunkContext: ChunkContext): RepeatStatus? {

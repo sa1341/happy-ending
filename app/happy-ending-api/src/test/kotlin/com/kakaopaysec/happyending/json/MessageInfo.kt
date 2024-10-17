@@ -17,20 +17,20 @@ import java.math.BigDecimal
 )
 abstract class Message(
     open val messageId: Long,
-    val type: MessageType
+    val type: MessageType,
 )
 
 @JsonTypeName(value = "TEXT")
 data class TextMessage(
     override val messageId: Long,
     val message: String,
-    val fundRatioInfoRequests: List<FundRatioInfoRequest>
+    val fundRatioInfoRequests: List<FundRatioInfoRequest>,
 ) : Message(messageId, MessageType.TEXT)
 
 @JsonTypeName(value = "FILE")
 data class FileMessage(
     override val messageId: Long,
-    val fileInfo: String
+    val fileInfo: String,
 ) : Message(messageId, MessageType.FILE)
 
 enum class MessageType {
@@ -40,7 +40,7 @@ enum class MessageType {
 data class FundRatioInfoRequest(
     val ratio: BigDecimal,
     val itemCode: String,
-    val fundSequence: Int
+    val fundSequence: Int,
 )
 
 class MessageSerializeTest {

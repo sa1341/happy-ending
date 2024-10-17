@@ -10,7 +10,7 @@ private val log = KotlinLogging.logger {}
 
 @Service
 class BookService(
-    private val bookDomainService: BookDomainService
+    private val bookDomainService: BookDomainService,
 ) {
 
     fun getBook(bookId: Long): BookDto? {

@@ -5,5 +5,6 @@ enum class RecordType(val description: String) {
     B("지급명세서 B레코드"),
     C("지급명세서 C레코드"),
     D("지급명세서 D레코드"),
-    G("지급명세서 G레코드");
+    G("지급명세서 G레코드"),
+    ;
 }

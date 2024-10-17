@@ -41,7 +41,7 @@ class FinalRecordEntity(
 
     @Column(name = "request_terminal_type")
     @Enumerated(EnumType.STRING)
-    val requestTerminalType: MediaCode
+    val requestTerminalType: MediaCode,
 ) : BaseAuditEntity() {
 
     fun addCreatedBy(createdBy: String) {

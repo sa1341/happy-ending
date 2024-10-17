@@ -16,7 +16,7 @@ class InvestmentProductService(
     private val accountService: AccountService,
     private val fundProductRepository: FundProductRepository,
     private val investmentProductRepository: InvestmentProductRepository,
-    private val investmentProductHistoryRepository: InvestmentProductHistoryRepository
+    private val investmentProductHistoryRepository: InvestmentProductHistoryRepository,
 ) {
 
     /**
@@ -26,7 +26,7 @@ class InvestmentProductService(
     @DistributeRedissonLock
     fun participateInvestmentEvent(
         accountNumber: String,
-        request: InvestmentProductRequest
+        request: InvestmentProductRequest,
     ): InvestmentProductResponse {
         // 계좌조회
         val account = accountService.getAccount(accountNumber) ?: throw RuntimeException("계좌가 없습니다.")
@@ -57,7 +57,7 @@ class InvestmentProductService(
     @Transactional
     fun participateInvestment(
         accountNumber: String,
-        request: InvestmentProductRequest
+        request: InvestmentProductRequest,
     ): InvestmentProductResponse {
         // 계좌조회
         val account = accountService.getAccount(accountNumber) ?: throw RuntimeException("계좌가 없습니다.")

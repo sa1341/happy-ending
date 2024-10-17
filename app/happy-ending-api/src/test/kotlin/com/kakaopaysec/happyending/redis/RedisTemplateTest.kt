@@ -13,7 +13,7 @@ import org.springframework.test.context.ActiveProfiles
 @SpringBootTest
 class RedisTemplateTest @Autowired constructor(
     private val redisTemplate: RedisTemplate<String, Any>,
-    private val stringRedisTemplate: StringRedisTemplate
+    private val stringRedisTemplate: StringRedisTemplate,
 ) {
 
     @Test

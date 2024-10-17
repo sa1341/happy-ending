@@ -118,7 +118,7 @@ object PaymentDescriptionEntityFaker {
         orgDpntRixSumA: BigDecimal? = null,
         orgDpntEtcIntx: BigDecimal? = null,
         orgDpntEtcIcmLitx: BigDecimal? = null,
-        orgDpntEtcIntxSumA: BigDecimal? = null
+        orgDpntEtcIntxSumA: BigDecimal? = null,
     ): CRecordEntity {
         return CRecordEntity(
             recordId = id,
@@ -278,7 +278,7 @@ object PaymentDescriptionEntityFaker {
         wkerId: String = "jean.calm",
         wrkTmnlId: String = "CCT000000",
         wrkDlDttm: String = "20230227100148333",
-        guid: String = "BAT20230227100143920TB4028634064"
+        guid: String = "BAT20230227100143920TB4028634064",
     ): DRecordEntity {
         return DRecordEntity(
             recordId = id,
@@ -354,7 +354,7 @@ object PaymentDescriptionEntityFaker {
         wkerId: String = "D01010089",
         wrkTmnlId: String = "",
         wrkDlDttm: String = "20221115110435079",
-        guid: String = "CUI20221115110434534010305060402"
+        guid: String = "CUI20221115110434534010305060402",
     ): GRecordEntity {
         return GRecordEntity(
             recordId = id,
@@ -394,7 +394,7 @@ object PaymentDescriptionEntityFaker {
         recordContent: String = "G961441    22087666988701201122333000000",
         requestTerminalType: MediaCode = MediaCode.INTEGRATED_TERMINAL,
         createdBy: String? = "jean.calm",
-        updatedBy: String? = "jean.calm"
+        updatedBy: String? = "jean.calm",
     ): FinalRecordEntity {
         return FinalRecordEntity(
             recordId = id,

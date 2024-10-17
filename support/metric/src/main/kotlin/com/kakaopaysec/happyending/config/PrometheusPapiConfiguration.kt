@@ -22,12 +22,12 @@ class PrometheusPapiConfiguration(
     @Value("\${prometheus.actuator.username}")
     private val userName: String,
     @Value("\${prometheus.actuator.password}")
-    private val password: String
+    private val password: String,
 ) {
     @Bean
     fun filterChain(
         http: HttpSecurity,
-        introspector: HandlerMappingIntrospector
+        introspector: HandlerMappingIntrospector,
     ): SecurityFilterChain {
         return http
             .csrf {

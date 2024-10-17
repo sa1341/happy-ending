@@ -20,13 +20,13 @@ private val log = KotlinLogging.logger {}
 @RestController
 class InvestmentApi(
     private val investmentProductService: InvestmentProductService,
-    private val fundProductRepository: FundProductRepository
+    private val fundProductRepository: FundProductRepository,
 ) {
 
     @PostMapping("participating-investment/{account_number}")
     fun participateInvestmentEvent(
         @PathVariable("account_number") accountNumber: String,
-        @RequestBody request: InvestmentProductRequest
+        @RequestBody request: InvestmentProductRequest,
     ): InvestmentProductResponse {
         return investmentProductService.participateInvestmentEvent(
             accountNumber = accountNumber,

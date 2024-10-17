@@ -11,7 +11,7 @@ data class BookDto(
     val isbn: String,
     val publishDate: String,
     val createdAt: String,
-    val modifiedAt: String
+    val modifiedAt: String,
 ) {
     companion object {
         fun from(book: Book): BookDto {

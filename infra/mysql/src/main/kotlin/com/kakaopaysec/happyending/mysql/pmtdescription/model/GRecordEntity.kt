@@ -84,5 +84,5 @@ class GRecordEntity(
     val wrkDlDttm: String,
 
     @Column(name = "guid")
-    val guid: String
+    val guid: String,
 )

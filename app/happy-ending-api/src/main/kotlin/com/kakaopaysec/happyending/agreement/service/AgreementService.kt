@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional
 @Service
 class AgreementService(
     private val serviceAgreementGroupRepository: ServiceAgreementGroupRepository,
-    private val serviceAgreementRepository: ServiceAgreementRepository
+    private val serviceAgreementRepository: ServiceAgreementRepository,
 ) {
 
     fun create(createAgreementRequest: CreateAgreementRequest) {

@@ -5,7 +5,7 @@ open class AccountException(
     open val errorCode: AccountErrorCode,
     open val exceptionMessage: String,
     open val detail: Any? = null,
-    override val cause: Throwable? = null
+    override val cause: Throwable? = null,
 ) : RuntimeException(
     (
         """
@@ -19,7 +19,7 @@ open class AccountException(
 class AccountBadRequestException(
     override val code: String,
     override val errorCode: AccountInputErrorCode,
-    override val detail: Any? = null
+    override val detail: Any? = null,
 ) : AccountException(
     code = code,
     errorCode = errorCode,
@@ -32,11 +32,11 @@ class AccountNicknameException(
     override val errorCode: AccountErrorCode,
     override val exceptionMessage: String,
     override val cause: Throwable? = null,
-    override val detail: Any? = null
+    override val detail: Any? = null,
 ) : AccountException(code, errorCode, exceptionMessage, detail, cause)
 class EvaluationException(
     override val code: String,
     override val errorCode: EvaluationErrorCode,
     override val cause: Throwable? = null,
-    override val detail: Any? = null
+    override val detail: Any? = null,
 ) : AccountException(code, errorCode, errorCode.message, detail, cause)

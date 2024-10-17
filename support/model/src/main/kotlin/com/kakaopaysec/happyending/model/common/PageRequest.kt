@@ -1,7 +1,7 @@
 package com.kakaopaysec.happyending.model.common
 data class PageRequest(
     val page: Int,
-    val size: Int
+    val size: Int,
 ) {
     companion object {
         fun of(page: Int, size: Int) =

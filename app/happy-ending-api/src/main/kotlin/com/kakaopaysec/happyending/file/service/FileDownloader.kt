@@ -13,7 +13,7 @@ private val log = KotlinLogging.logger {}
 @Service
 class FileDownloader(
     @Value("\${happy-ending.file.path}")
-    private val path: String
+    private val path: String,
 ) {
     fun download(fileName: String): Resource {
         runCatching {

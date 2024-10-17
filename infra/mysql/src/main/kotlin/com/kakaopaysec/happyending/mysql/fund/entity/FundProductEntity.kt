@@ -16,7 +16,7 @@ class FundProductEntity(
     @Column(name = "code")
     val code: String,
     @Column(name = "name")
-    val name: String
+    val name: String,
 ) : BaseAuditEntity() {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

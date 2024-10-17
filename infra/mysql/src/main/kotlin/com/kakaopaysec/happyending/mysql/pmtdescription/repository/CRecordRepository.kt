@@ -8,6 +8,6 @@ interface CRecordRepository : JpaRepository<CRecordEntity, Long> {
         accountNumber: String,
         tradeAt: String,
         tradeSeq: Long,
-        txnSeq: Long
+        txnSeq: Long,
     ): CRecordEntity?
 }

@@ -41,7 +41,7 @@ class RedisConfiguration(
     private val redisObjectMapper: ObjectMapper,
     private val redisProperties: RedisProperties,
     @Value("\${spring.redis.password:#{null}}")
-    private val password: String?
+    private val password: String?,
 ) {
     @Bean
     @Primary
@@ -132,7 +132,7 @@ class RedisConfiguration(
     private fun redisCacheConfiguration(
         jsonSerializer: RedisSerializationContext.SerializationPair<Any>,
         serviceName: String,
-        ttl: Duration
+        ttl: Duration,
     ) = RedisCacheConfiguration.defaultCacheConfig()
         .serializeValuesWith(jsonSerializer)
         .computePrefixWith { cacheName ->

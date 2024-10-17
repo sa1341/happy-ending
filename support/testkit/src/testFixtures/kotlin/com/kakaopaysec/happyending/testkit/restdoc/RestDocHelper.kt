@@ -26,7 +26,7 @@ open class RestDocHelper {
     @BeforeEach
     fun setUp(
         webApplicationContext: WebApplicationContext,
-        restDocumentation: RestDocumentationContextProvider
+        restDocumentation: RestDocumentationContextProvider,
     ) {
         mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext)
             .apply<DefaultMockMvcBuilder>(

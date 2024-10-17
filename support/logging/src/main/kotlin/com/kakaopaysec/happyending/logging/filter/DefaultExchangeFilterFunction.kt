@@ -13,7 +13,7 @@ import java.nio.charset.StandardCharsets
 import java.time.LocalDateTime
 
 class DefaultExchangeFilterFunction(
-    private val apiJsonLogger: ApiJsonLogger
+    private val apiJsonLogger: ApiJsonLogger,
 ) : ExchangeFilterFunction {
 
     override fun filter(request: ClientRequest, next: ExchangeFunction): Mono<ClientResponse> {

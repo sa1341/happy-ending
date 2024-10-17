@@ -12,7 +12,7 @@ private val log = KotlinLogging.logger {}
 
 @Component
 class TopicMessageListener(
-    private val kafkaJacksonMapper: ObjectMapper
+    private val kafkaJacksonMapper: ObjectMapper,
 ) {
 
     @KafkaListener(
@@ -39,5 +39,5 @@ class TopicMessageListener(
 
 data class Person(
     val name: String,
-    val age: Int
+    val age: Int,
 )

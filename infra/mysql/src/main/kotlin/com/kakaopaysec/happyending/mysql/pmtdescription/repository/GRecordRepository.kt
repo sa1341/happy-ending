@@ -9,12 +9,12 @@ interface GRecordRepository : JpaRepository<GRecordEntity, Long> {
         rtmtSbdoDataTcd: String,
         baseYear: String,
         createdAt: String,
-        createdSeq: Long
+        createdSeq: Long,
     ): GRecordEntity?
 
     fun findByTradeAtAndTradeSeqAndAccountNumber(
         tradeAt: String,
         tradeSeq: Long,
-        accountNumber: String
+        accountNumber: String,
     ): GRecordEntity?
 }

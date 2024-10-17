@@ -17,5 +17,5 @@ class ServiceAgreementGroup(
     val serviceCode: String,
     val serviceName: String,
     val accountNumber: String,
-    val serviceGroupId: String
+    val serviceGroupId: String,
 )

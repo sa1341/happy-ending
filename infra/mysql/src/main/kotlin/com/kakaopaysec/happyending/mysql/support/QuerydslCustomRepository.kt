@@ -11,7 +11,7 @@ import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport
 import kotlin.properties.Delegates
 
 abstract class QuerydslCustomRepository(
-    domainClass: Class<*>
+    domainClass: Class<*>,
 ) : QuerydslRepositorySupport(domainClass) {
 
     private var queryFactory: JPAQueryFactory by Delegates.notNull()

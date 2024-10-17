@@ -6,7 +6,7 @@ sealed class BusinessException(
     val errorCode: ErrorCode,
     val details: Any? = null,
     val description: String? = null,
-    override val cause: Throwable? = null
+    override val cause: Throwable? = null,
 ) : RuntimeException(
     """
      [ErrorCode] : ${errorCode.code}
@@ -26,11 +26,12 @@ class BadRequestException(description: String?) : BusinessException(
 
 enum class ErrorCode(
     val status: HttpStatus,
-    val message: String
+    val message: String,
 ) {
     NOT_FOUND_BOOK(HttpStatus.NOT_FOUND, "책이 존재하지 않습니다."),
     BOOK_ALREADY_EXIST(HttpStatus.BAD_REQUEST, "책이 이미 등록되어 있습니다."),
-    BAD_REQUEST(HttpStatus.BAD_REQUEST, "입력값이 올바르지 않습니다.");
+    BAD_REQUEST(HttpStatus.BAD_REQUEST, "입력값이 올바르지 않습니다."),
+    ;
 
     val code: String
         get() {

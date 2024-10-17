@@ -22,5 +22,5 @@ data class Account(
     val accountNo: String,
 
     @Column(name = "name")
-    val name: String
+    val name: String,
 ) : BaseAuditEntity()

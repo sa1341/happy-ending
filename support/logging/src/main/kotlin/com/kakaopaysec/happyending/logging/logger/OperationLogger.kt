@@ -15,7 +15,7 @@ class OperationLogger {
     fun info(
         startTime: LocalDateTime,
         request: HttpServletRequestWrapper,
-        response: OutputStreamCopiedHttpResponseWrapper
+        response: OutputStreamCopiedHttpResponseWrapper,
     ) {
         try {
             val elapsedTime = ChronoUnit.MILLIS.between(startTime, LocalDateTime.now())

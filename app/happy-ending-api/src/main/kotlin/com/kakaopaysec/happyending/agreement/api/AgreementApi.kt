@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/api/v1/agreements")
 @RestController
 class AgreementApi(
-    private val serviceAgreementService: AgreementService
+    private val serviceAgreementService: AgreementService,
 ) {
 
     @PostMapping("/recurring-payment")
@@ -20,5 +20,5 @@ class AgreementApi(
 
 data class CreateAgreementRequest(
     val accountNumber: String,
-    val serviceGroupId: String
+    val serviceGroupId: String,
 )

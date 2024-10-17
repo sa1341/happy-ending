@@ -17,7 +17,7 @@ class PaySecUserArgumentResolver : HandlerMethodArgumentResolver {
         parameter: MethodParameter,
         mavContainer: ModelAndViewContainer?,
         webRequest: NativeWebRequest,
-        binderFactory: WebDataBinderFactory?
+        binderFactory: WebDataBinderFactory?,
     ): PaySecUser {
         val request = webRequest.getNativeRequest(HttpServletRequest::class.java)
         val appUserId = request?.getHeader("x-app-user-id") ?: throw RuntimeException("No x-app-user-id header")
@@ -26,5 +26,5 @@ class PaySecUserArgumentResolver : HandlerMethodArgumentResolver {
 }
 
 data class PaySecUser(
-    val appUserId: String
+    val appUserId: String,
 )

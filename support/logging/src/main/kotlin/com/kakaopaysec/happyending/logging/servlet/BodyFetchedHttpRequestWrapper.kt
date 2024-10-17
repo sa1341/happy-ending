@@ -10,7 +10,7 @@ import java.io.IOException
 import java.io.InputStream
 
 class BodyFetchedHttpRequestWrapper(
-    request: HttpServletRequest?
+    request: HttpServletRequest?,
 ) : HttpServletRequestWrapper(request) {
     private val bodyData: ByteArray
 

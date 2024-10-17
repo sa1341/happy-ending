@@ -18,7 +18,7 @@ class InvestmentProduct(
     @Column(name = "investment_amount")
     var investmentAmount: Long,
     @Column(name = "limit_amount")
-    val limitAmount: Long = 1000000L
+    val limitAmount: Long = 1000000L,
 ) : BaseAuditEntity() {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

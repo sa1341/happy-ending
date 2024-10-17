@@ -5,7 +5,7 @@ dependencies {
     implementation(project(":support:logging"))
     implementation(project(":support:metric"))
     implementation("org.springframework.boot:spring-boot-starter-batch")
-    //implementation("org.springframework.cloud:spring-cloud-starter-vault-config")
+    // implementation("org.springframework.cloud:spring-cloud-starter-vault-config")
 
     testImplementation("org.springframework.batch:spring-batch-test")
 }

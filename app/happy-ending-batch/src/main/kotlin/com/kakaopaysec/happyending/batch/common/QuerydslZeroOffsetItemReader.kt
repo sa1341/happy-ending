@@ -21,7 +21,7 @@ open class QueryDslZeroOffsetItemReader<T : Any>(
     pageSize: Int,
     entityManagerFactory: EntityManagerFactory,
     private val idAndSort: IdAndSort,
-    private val idField: NumberPath<Long>
+    private val idField: NumberPath<Long>,
 ) : QuerydslItemReader<T>(
     name,
     pageSize,
@@ -34,7 +34,7 @@ open class QueryDslZeroOffsetItemReader<T : Any>(
         entityManagerFactory: EntityManagerFactory,
         idAndSort: IdAndSort,
         idField: NumberPath<Long>,
-        query: QuerydslItemReaderQuery<T>
+        query: QuerydslItemReaderQuery<T>,
     ) : this(
         name,
         pageSize,
@@ -130,7 +130,7 @@ open class QueryDslZeroOffsetItemReader<T : Any>(
 
 open class IdAndSort(
     private val whereExpression: (id: NumberPath<Long>, offsetId: Long, pageSize: Int) -> BooleanExpression,
-    private val direction: Sort.Direction
+    private val direction: Sort.Direction,
 ) {
     val isAsc: Boolean
         get() = direction == Sort.Direction.ASC

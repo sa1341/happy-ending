@@ -19,7 +19,7 @@ private val logger = KotlinLogging.logger("app-json-logger")
 class ApiJsonLogger(
     private val profileUtils: ProfileUtils,
     @Value("\${spring.application.name}")
-    private val appName: String
+    private val appName: String,
 ) {
 
     class LogFormat(
@@ -33,18 +33,18 @@ class ApiJsonLogger(
         val request: Request<*>,
         val response: Response<*>,
         val elapsedTime: Long,
-        val logType: JsonLogType = JsonLogType.INGRESS
+        val logType: JsonLogType = JsonLogType.INGRESS,
     )
 
     class Request<T>(
         val headers: Map<String, String>,
-        val body: T?
+        val body: T?,
     )
 
     class Response<T>(
         val status: Int,
         val headers: Map<String, String>,
-        val body: T?
+        val body: T?,
     )
 
     fun info(
@@ -52,7 +52,7 @@ class ApiJsonLogger(
         request: ClientRequest,
         requestBody: String,
         response: ClientResponse?,
-        responseBody: String
+        responseBody: String,
     ) {
         val logFormat = LogFormat(
             hostname = request.url().host,
@@ -83,7 +83,7 @@ class ApiJsonLogger(
         startTime: LocalDateTime,
         request: ClientRequest,
         requestBody: String,
-        errorMessage: String
+        errorMessage: String,
     ) {
         val logFormat = LogFormat(
             hostname = request.url().host,
@@ -111,7 +111,7 @@ class ApiJsonLogger(
     fun info(
         startTime: LocalDateTime,
         request: HttpServletRequestWrapper,
-        response: OutputStreamCopiedHttpResponseWrapper
+        response: OutputStreamCopiedHttpResponseWrapper,
     ) {
         val url = if (request.queryString == null) {
             request.requestURI

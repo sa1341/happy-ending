@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component
 @Component
 class InvestmentProductService(
     private val investmentProductRepository: InvestmentProductRepository,
-    private val securitiesClientService: SecuritiesClientService
+    private val securitiesClientService: SecuritiesClientService,
 ) {
 
     fun callApi(investmentProductRequest: InvestmentProductRequest) {

@@ -21,7 +21,7 @@ class ExceptionHandler : ResponseEntityExceptionHandler() {
         ex: MissingServletRequestParameterException,
         headers: HttpHeaders,
         status: HttpStatusCode,
-        request: WebRequest
+        request: WebRequest,
     ): ResponseEntity<Any>? {
         return super.handleMissingServletRequestParameter(ex, headers, status, request)
     }
@@ -30,7 +30,7 @@ class ExceptionHandler : ResponseEntityExceptionHandler() {
         ex: HttpMessageNotReadableException,
         headers: HttpHeaders,
         status: HttpStatusCode,
-        request: WebRequest
+        request: WebRequest,
     ): ResponseEntity<Any>? {
         return super.handleHttpMessageNotReadable(ex, headers, status, request)
     }
@@ -39,7 +39,7 @@ class ExceptionHandler : ResponseEntityExceptionHandler() {
         ex: NoHandlerFoundException,
         headers: HttpHeaders,
         status: HttpStatusCode,
-        request: WebRequest
+        request: WebRequest,
     ): ResponseEntity<Any>? {
         return super.handleNoHandlerFoundException(ex, headers, status, request)
     }
@@ -47,7 +47,7 @@ class ExceptionHandler : ResponseEntityExceptionHandler() {
     @ExceptionHandler(BusinessException::class)
     fun handleBusinessException(
         ex: BusinessException,
-        request: HttpServletRequest
+        request: HttpServletRequest,
     ): ResponseEntity<ErrorResponse> {
         return ResponseEntity
             .status(ex.errorCode.status)

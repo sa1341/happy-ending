@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service
 
 @Service
 class AccountService(
-    private val accountRepository: AccountRepository
+    private val accountRepository: AccountRepository,
 ) {
     fun saveAccountNumber(request: AccountRegistrationRequest): AccountRegistrationResponse {
         val accountEntity = accountRepository.save(
@@ -23,7 +23,7 @@ class AccountService(
     }
     fun getAccountNumber(
         appUserId: String,
-        accountNumber: String
+        accountNumber: String,
     ): AccountResponse {
         return AccountResponse(
             accountNumber = accountNumber,
@@ -34,5 +34,5 @@ class AccountService(
 
 data class AccountResponse(
     val accountNumber: String,
-    val appUserId: String
+    val appUserId: String,
 )

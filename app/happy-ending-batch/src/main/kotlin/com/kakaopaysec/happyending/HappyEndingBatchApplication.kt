@@ -1,6 +1,5 @@
 package com.kakaopaysec.happyending
 
-import com.kakaopaysec.happyending.mysql.invest.entity.InvestmentProduct
 import com.kakaopaysec.happyending.mysql.invest.repository.InvestmentProductRepository
 import mu.KotlinLogging
 import org.springframework.boot.ApplicationArguments
@@ -14,8 +13,8 @@ import kotlin.system.exitProcess
 private val log = KotlinLogging.logger {}
 
 @SpringBootApplication
-class HappyEndingBatchApplication(
-    private val investmentProductRepository: InvestmentProductRepository
+open class HappyEndingBatchApplication(
+    private val investmentProductRepository: InvestmentProductRepository,
 ) : ApplicationRunner {
     override fun run(args: ApplicationArguments?) {
      /*   (1..10).forEach {

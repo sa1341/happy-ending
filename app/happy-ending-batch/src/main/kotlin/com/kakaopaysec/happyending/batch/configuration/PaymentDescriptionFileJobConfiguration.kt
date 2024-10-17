@@ -17,7 +17,7 @@ class PaymentDescriptionFileJobConfiguration {
     @Bean
     fun paymentDescriptionFileJob(
         jobRepository: JobRepository,
-        paymentDescriptionFileStep: Step
+        paymentDescriptionFileStep: Step,
     ): Job = JobBuilder(jobName, jobRepository)
         .start(paymentDescriptionFileStep)
         .incrementer(UniqueRunIdIncrementer())
@@ -28,7 +28,7 @@ class PaymentDescriptionFileJobConfiguration {
     fun paymentDescriptionFileStep(
         paymentDescriptionFileTasklet: PaymentDescriptionFileTasklet,
         jobRepository: JobRepository,
-        transactionManager: PlatformTransactionManager
+        transactionManager: PlatformTransactionManager,
     ): Step = StepBuilder(stepName, jobRepository)
         .tasklet(paymentDescriptionFileTasklet, transactionManager)
         .build()

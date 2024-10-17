@@ -14,7 +14,7 @@ import java.util.*
 @ActiveProfiles("test")
 class ServiceAgreementRepositoryTest @Autowired constructor(
     private val serviceAgreementRepository: ServiceAgreementRepository,
-    private val serviceAgreementGroupRepository: ServiceAgreementGroupRepository
+    private val serviceAgreementGroupRepository: ServiceAgreementGroupRepository,
 ) : DataJpaTestSupport() {
 
     @Test

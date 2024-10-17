@@ -3,7 +3,7 @@ package com.kakaopaysec.happyending.common.model
 enum class SecuritiesServiceType(
     val serviceId: String,
     val description: String,
-    val isRetry: Boolean? = false
+    val isRetry: Boolean? = false,
 ) {
     ACCOUNT_LIST(serviceId = "TACQ7231", description = "계좌목록공통조회"),
     GET_ACCOUNT_NICKNAME("TPPQ9100", "연금계좌별칭조회"),
@@ -20,5 +20,5 @@ enum class SecuritiesServiceType(
     GET_KFB_REGISTERED_ACCOUNTS("TPPQ9210", "은행연합회한도 가입내역조회"),
     GET_EXPECTATION_TAX_DEDUCTION("TPPQ9310", "세액공제 예상금액 조회"),
     GET_ACCOUNT_ABLE_DATE_AND_AGE("TPPQ9002", "연금계좌 개시가능일자 및 개시가능연령 조회"),
-    ISSUE_ACCOUNT_CERTIFICATE("TPPU9800", "계좌확인서 이메일 발송")
+    ISSUE_ACCOUNT_CERTIFICATE("TPPU9800", "계좌확인서 이메일 발송"),
 }

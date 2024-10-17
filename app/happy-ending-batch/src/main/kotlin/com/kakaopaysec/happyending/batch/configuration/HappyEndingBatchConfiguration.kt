@@ -26,7 +26,7 @@ class HappyEndingBatchConfiguration {
         jobLauncher: JobLauncher,
         jobExplorer: JobExplorer,
         jobRepository: JobRepository,
-        properties: BatchProperties
+        properties: BatchProperties,
     ): JobLauncherApplicationRunner {
         val runner = JobLauncherApplicationRunner(jobLauncher, jobExplorer, jobRepository)
         val jobName: String? = properties.job.name

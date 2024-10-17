@@ -22,7 +22,7 @@ import javax.sql.DataSource
 
 @Component
 class InvestmentProductActionJobConfig(
-    private val dataSource: DataSource
+    private val dataSource: DataSource,
 ) {
 
     private val chunkSize = 3
@@ -30,7 +30,7 @@ class InvestmentProductActionJobConfig(
     @Bean
     fun investmentProductActionJob(
         jobRepository: JobRepository,
-        investmentProductActionStep: Step
+        investmentProductActionStep: Step,
     ): Job = JobBuilder(jobName, jobRepository)
         .start(investmentProductActionStep)
         .incrementer(UniqueRunIdIncrementer())

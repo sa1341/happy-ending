@@ -35,7 +35,7 @@ enum class MediaCode(@JsonValue val code: String, val description: String) {
     KAKAOPAY_JARVIS("P40", "jarvis 주문"),
     KAKAOPAY_STOCK("P50", "kakaopay 주식"),
     KAKAO_TALK_PAY("T10", "kakao talk pay"),
-    KAKAOPAY_APP("110", "페이앱")
+    KAKAOPAY_APP("110", "페이앱"),
 }
 
 enum class SystemCode(@JsonValue val code: String, val description: String) {
@@ -43,13 +43,13 @@ enum class SystemCode(@JsonValue val code: String, val description: String) {
     TEST("T", "pay 배포 기준: dev, sandbox"),
     PRODUCT("P", "pay 배포 기준: beta, production"),
     LOCAL("L", "local"),
-    SIMULATION("S", "시뮬레이션")
+    SIMULATION("S", "시뮬레이션"),
 }
 
 enum class ChannelType {
     PAYAPP,
     KAKAOTALK,
-    ADMIN
+    ADMIN,
 }
 
 object Header {

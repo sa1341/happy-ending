@@ -45,7 +45,7 @@ class DatabaseConfiguration {
     @Bean
     fun routingDataSource(
         @Qualifier("writeDataSource") writeDataSource: DataSource,
-        @Qualifier("readDataSource") readDataSource: DataSource
+        @Qualifier("readDataSource") readDataSource: DataSource,
     ): ReplicationRoutingDataSource {
         val routingDataSource = ReplicationRoutingDataSource()
 

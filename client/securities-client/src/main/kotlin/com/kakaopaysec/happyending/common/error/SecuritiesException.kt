@@ -9,7 +9,7 @@ class SecuritiesException(
     override val appUserId: String? = null,
     override val cause: Throwable? = null,
     val customMessage: String? = null,
-    val securitiesError: SecuritiesError? = null
+    val securitiesError: SecuritiesError? = null,
 ) : WebException(
     code = code,
     errorCode = errorCode,
@@ -27,7 +27,7 @@ class SecuritiesException(
             errorCode: SecuritiesErrorCode,
             customMessage: String? = null,
             securitiesClientMessage: SecuritiesClientMessage,
-            appUserId: String?
+            appUserId: String?,
         ) =
             SecuritiesException(
                 code = securitiesClientMessage.messageCode,
@@ -41,7 +41,7 @@ class SecuritiesException(
             securitiesErrorCode: SecuritiesErrorCode,
             message: String? = null,
             appUserId: String? = null,
-            cause: Throwable? = null
+            cause: Throwable? = null,
         ): SecuritiesException {
             return SecuritiesException(
                 customMessage = message ?: securitiesErrorCode.message,
@@ -56,7 +56,7 @@ class SecuritiesException(
 
 data class SecuritiesError(
     val messageCode: String,
-    val messageContent: String
+    val messageContent: String,
 ) {
     companion object {
         fun of(message: SecuritiesClientMessage): SecuritiesError = SecuritiesError(

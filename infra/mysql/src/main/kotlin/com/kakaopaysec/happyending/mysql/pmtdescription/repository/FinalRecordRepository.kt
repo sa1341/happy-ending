@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository
 interface FinalRecordRepository : JpaRepository<FinalRecordEntity, Long> {
     fun findByIcmImpdYrAndRecordType(
         icmImpdYr: String,
-        recordType: RecordType
+        recordType: RecordType,
     ): FinalRecordEntity?
 }

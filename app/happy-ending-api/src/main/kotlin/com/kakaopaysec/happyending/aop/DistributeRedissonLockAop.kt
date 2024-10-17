@@ -18,7 +18,7 @@ private val log = KotlinLogging.logger {}
 @Component
 class DistributeRedissonLockAop(
     private val redissonClient: RedissonClient,
-    private val redissonTransaction: RedissonTransaction
+    private val redissonTransaction: RedissonTransaction,
 ) {
     @Pointcut("@annotation(com.kakaopaysec.happyending.annotation.DistributeRedissonLock)")
     fun distributeRedissonTarget() {}

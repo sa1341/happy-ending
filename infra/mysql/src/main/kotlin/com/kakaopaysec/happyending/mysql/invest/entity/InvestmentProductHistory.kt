@@ -16,7 +16,7 @@ class InvestmentProductHistory(
     val accountNumber: String,
     val fundCode: String,
     val investAmount: Long,
-    val investmentProductId: Long?
+    val investmentProductId: Long?,
 ) : BaseAuditEntity() {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

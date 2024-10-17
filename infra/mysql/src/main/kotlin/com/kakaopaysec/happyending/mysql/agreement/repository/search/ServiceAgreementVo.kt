@@ -6,5 +6,5 @@ import com.querydsl.core.annotations.QueryProjection
 
 data class ServiceAgreementVo @QueryProjection constructor(
     val serviceAgreementGroup: ServiceAgreementGroup,
-    val serviceAgreement: ServiceAgreement
+    val serviceAgreement: ServiceAgreement,
 )

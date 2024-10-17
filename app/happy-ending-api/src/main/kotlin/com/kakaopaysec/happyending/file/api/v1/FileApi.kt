@@ -19,13 +19,13 @@ private val log = KotlinLogging.logger {}
 @RequestMapping("/api/v1/files")
 @RestController
 class FileApi(
-    private val fileDownloader: FileDownloader
+    private val fileDownloader: FileDownloader,
 ) {
 
     @GetMapping
     fun downloadFile(
         @RequestParam("fileName") fileName: String,
-        httpServletResponse: HttpServletResponse
+        httpServletResponse: HttpServletResponse,
     ): ResponseEntity<Resource> {
         log.info { "fileName: $fileName" }
         val resource = fileDownloader.download(fileName)
@@ -39,7 +39,7 @@ class FileApi(
     @GetMapping("/binary")
     fun downloadByteArrays(
         @RequestParam("fileName") fileName: String,
-        httpServletResponse: HttpServletResponse
+        httpServletResponse: HttpServletResponse,
     ) {
         log.info { "fileName: $fileName" }
         val files = FileUtils.readFileToByteArray(File("/Users/limjun-young/workspace/privacy/dev/test/plaintext.txt"))

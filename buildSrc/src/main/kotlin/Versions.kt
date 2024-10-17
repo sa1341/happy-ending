@@ -18,7 +18,7 @@ object Versions {
 
     // util
     const val KOVER_VERSION = "0.6.1"
-    const val KT_LINT_VERSION = "11.3.1"
+    const val KT_LINT_VERSION = "11.6.1"
     const val ASCII_DOCTOR_VERSION = "3.3.2"
     const val COMMONS_LANG3 = "3.12.0"
     const val COMMONS_IO = "2.13.0"
