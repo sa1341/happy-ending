@@ -2,13 +2,12 @@ import org.gradle.api.JavaVersion
 
 object Versions {
     // language
-    val java = JavaVersion.VERSION_17
-    const val KOTLIN = "1.7.22"
-    const val KOTLIN_VERSION = "1.9.10"
+    val java = JavaVersion.toVersion("21")
+    const val KOTLIN_VERSION = "2.0.10"
 
     // spring
-    const val SPRING_BOOT_VERSION = "3.1.6"
-    const val SPRING_DEPENDENCY_MANAGEMENT_VERSION = "1.1.2"
+    const val SPRING_BOOT_VERSION = "3.3.4"
+    const val SPRING_DEPENDENCY_MANAGEMENT_VERSION = "1.1.3"
     const val SPRING_CLOUD_VERSION = "2022.0.4"
     const val SPRING_CLOUD_STREAM = "4.0.4"
 

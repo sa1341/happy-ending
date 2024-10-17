@@ -1,6 +1,5 @@
 package com.kakaopaysec.happyending.mysql.pmtdescription
 
-import com.kakaopaysec.happyending.mysql.faker.PaymentDescriptionEntityFaker
 import com.kakaopaysec.happyending.mysql.pmtdescription.model.type.RecordType
 import com.kakaopaysec.happyending.mysql.pmtdescription.repository.CRecordRepository
 import com.kakaopaysec.happyending.mysql.pmtdescription.repository.DRecordRepository

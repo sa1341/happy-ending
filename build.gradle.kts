@@ -1,3 +1,6 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     id("org.springframework.boot") version Versions.SPRING_BOOT_VERSION
     id("io.spring.dependency-management") version Versions.SPRING_DEPENDENCY_MANAGEMENT_VERSION
@@ -5,10 +8,10 @@ plugins {
     id("org.jlleitschuh.gradle.ktlint-idea") version Versions.KT_LINT_VERSION
     id("java-test-fixtures")
     id("org.jetbrains.kotlinx.kover") version Versions.KOVER_VERSION
-    kotlin("jvm") version Versions.KOTLIN
-    kotlin("kapt") version Versions.KOTLIN
-    kotlin("plugin.spring") version Versions.KOTLIN
-    kotlin("plugin.jpa") version Versions.KOTLIN
+    kotlin("jvm") version Versions.KOTLIN_VERSION
+    kotlin("kapt") version Versions.KOTLIN_VERSION
+    kotlin("plugin.spring") version Versions.KOTLIN_VERSION
+    kotlin("plugin.jpa") version Versions.KOTLIN_VERSION
 }
 
 allprojects {
@@ -101,6 +104,13 @@ subprojects {
         testImplementation("com.h2database:h2")
     }
 
+    tasks.withType<KotlinCompile>().configureEach {
+        compilerOptions {
+            freeCompilerArgs.add("-Xjsr305=strict")
+            jvmTarget.set(JvmTarget.JVM_21)
+        }
+    }
+
     tasks {
         test {
             useJUnitPlatform()
@@ -110,7 +120,7 @@ subprojects {
         koverHtmlReport {
             kover {
                 htmlReport {
-                    reportDir.set(file("$buildDir/report/kover/kover.html"))
+                    reportDir.set(file("${layout.buildDirectory}/report/kover/kover.html"))
                 }
             }
             finalizedBy(koverVerify)
@@ -135,20 +145,6 @@ subprojects {
                         }
                     }
                 }
-            }
-        }
-
-        compileKotlin {
-            kotlinOptions {
-                freeCompilerArgs += "-Xjsr305=strict"
-                jvmTarget = "17"
-            }
-        }
-
-        compileTestKotlin {
-            kotlinOptions {
-                freeCompilerArgs += "-Xjsr305=strict"
-                jvmTarget = "17"
             }
         }
     }
